@@ -1,0 +1,427 @@
+swagger: '2.0'
+info:
+  title: 'Angular Academy API'
+host: 'localhost:4242'
+tags:
+  - name: 'user'
+    description: 'Operations about user'
+  - name: 'movies'
+    description: 'Operations about movies'
+
+paths:
+  /users:
+    post:
+      tags:
+        - 'user'
+      summary: 'Create user'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'body'
+          name: 'body'
+          description: 'user info'
+          required: true
+          schema:
+            required:
+              - username
+              - password
+            properties:
+              firstname:
+                type: string
+                example: 'John'
+              lastname:
+                type: string
+                example: 'Smith'
+              username:
+                type: string
+                example: 'SJ100'
+              password:
+                type: string
+                example: 'Strong password'
+      responses:
+        '200':
+          description: 'The created user and the jwt'
+          schema:
+            properties:
+              user:
+                $ref: '#/definitions/User'
+              jwt:
+                type: string
+        '409':
+          description: 'Username exists'
+
+  /users/signin:
+    post:
+      tags:
+        - 'user'
+      summary: 'Logs user into the system'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'body'
+          name: 'body'
+          description: 'user credentials'
+          required: true
+          schema:
+            required:
+              - username
+              - password
+            properties:
+              username:
+                type: string
+                example: 'SJ100'
+              password:
+                type: string
+                example: 'The correct password'
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            properties:
+              user:
+                $ref: '#/definitions/User'
+              jwt:
+                type: string
+        '400':
+          description: 'Invalid username/password supplied'
+  /users/details:
+    get:
+      tags:
+        - 'user'
+      summary: 'Get the details of the user logged in'
+      produces:
+        - 'application/json'
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/User'
+        '404':
+          description: 'User not found.'
+      security:
+        - jwt: []
+  /users/:
+    put:
+      tags:
+        - 'user'
+      summary: 'Update user'
+      description: 'This can only be done by the logged in user.'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'body'
+          name: 'body'
+          description: 'Updated user object'
+          required: true
+          schema:
+            properties:
+              firstname:
+                type: string
+                example: 'Dimitri'
+              lastname:
+                type: string
+                example: 'Foobar'
+              username:
+                type: string
+                example: 'Superman090'
+              password:
+                type: string
+                example: 'A stronger password'
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/User'
+        '404':
+          description: 'User not found'
+        '409':
+          description: 'Conflict. User name exists.'
+      security:
+        - jwt: []
+    delete:
+      tags:
+        - 'user'
+      summary: 'Delete user'
+      description: 'This can only be done by the logged in user.'
+      produces:
+        - 'application/json'
+      responses:
+        '200':
+          description: 'deleted successfully'
+          schema:
+            $ref: '#/definitions/User'
+        '404':
+          description: 'User not found'
+      security:
+        - jwt: []
+
+  /users/favorites:
+    get:
+      tags:
+        - 'user'
+      summary: 'Get the favorite movies of the logged in user'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'query'
+          name: 'title'
+          description: 'The title of the favorite movies to search for (includes)'
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/FavoriteMovie'
+        '401':
+          description: 'Unauthorized'
+      security:
+        - jwt: []
+    post:
+      tags:
+        - 'user'
+      summary: 'Add a movie to the logged in user favorites'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'body'
+          name: 'body'
+          description: 'The movie id'
+          required: true
+          schema:
+            required:
+              - movieId
+            properties:
+              movieId:
+                type: string
+                example: 'P08ml5FIyD'
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/FavoriteMovieCorrelation'
+        '401':
+          description: 'Unauthorized'
+        '404':
+          description: 'Movie not found'
+      security:
+        - jwt: []
+  /users/favorites/{favoriteId}:
+    delete:
+      tags:
+        - 'user'
+      summary: 'Remove a movie from the logged in user favorites using the favorite id'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'path'
+          name: 'favoriteId'
+          description: 'The id of the favorite to delete'
+      responses:
+        '200':
+          description: 'successful operation'
+          schema:
+            $ref: '#/definitions/FavoriteMovieCorrelation'
+        '401':
+          description: 'Unauthorized'
+        '404':
+          description: 'Movie not found'
+      security:
+        - jwt: []
+
+  /movies:
+    get:
+      tags:
+        - 'movies'
+      summary: 'Get movies'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'query'
+          name: 'title'
+          description: 'The title of the movies to search for (includes)'
+      responses:
+        '200':
+          description: 'The movies filtered by title'
+          schema:
+            type: 'array'
+            items:
+              $ref: '#/definitions/Movie'
+        '401':
+          description: 'Not authorized'
+      security:
+        - jwt: []
+    post:
+      tags:
+        - 'movies'
+      summary: 'Create movie'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'body'
+          name: 'body'
+          required:
+            - title
+          description: 'The new movie to add'
+          schema:
+            required:
+              - title
+            properties:
+              title:
+                type: string
+                example: 'Avengers: Endgame'
+              description:
+                type: string
+                example: 'After the devastating events of...'
+              dateReleased:
+                type: 'string'
+                format: 'date-time'
+                example: '2020-10-20T20:02:09.404Z'
+      responses:
+        '200':
+          description: 'The created movie'
+          schema:
+            $ref: '#/definitions/Movie'
+        '401':
+          description: 'Unauthorized'
+      security:
+        - jwt: []
+  /movies/{movieId}:
+    get:
+      tags:
+        - 'movies'
+      summary: 'Get movie by id'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'path'
+          name: 'movieId'
+          description: 'The id of the movie to fetch'
+      responses:
+        '200':
+          description: 'The movie with provided id'
+          schema:
+            $ref: '#/definitions/Movie'
+        '401':
+          description: 'Not authorized'
+        '404':
+          description: 'Not found'
+      security:
+        - jwt: []
+    put:
+      tags:
+        - 'movies'
+      summary: 'Update movie'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'path'
+          name: 'movieId'
+          description: 'The id of the movie to update'
+        - in: 'body'
+          name: 'body'
+          description: 'The updated movie'
+          required: true
+          schema:
+            properties:
+              title:
+                type: string
+                example: 'Avengers: Endgame'
+              description:
+                type: string
+                example: 'After the devastating events of...'
+              dateReleased:
+                type: 'string'
+                format: 'date-time'
+                example: '2020-10-20T20:02:09.404Z'
+      responses:
+        '200':
+          description: 'The updated movie'
+          schema:
+            $ref: '#/definitions/Movie'
+        '401':
+          description: 'Unauthorized'
+        '404':
+          description: 'Movie not found'
+        '409':
+          description: 'Conflict title exists'
+      security:
+        - jwt: []
+    delete:
+      tags:
+        - 'movies'
+      summary: 'Delete movie'
+      produces:
+        - 'application/json'
+      parameters:
+        - in: 'path'
+          name: 'movieId'
+          description: 'The id of the movie to delete'
+
+      responses:
+        '200':
+          description: 'Deleted successfully'
+          schema:
+            $ref: '#/definitions/Movie'
+        '401':
+          description: 'Unauthorized'
+        '404':
+          description: 'Movie not found'
+      security:
+        - jwt: []
+
+securityDefinitions:
+  jwt:
+    type: apiKey
+    in: header
+    name: token
+definitions:
+  User:
+    type: 'object'
+    properties:
+      id:
+        type: 'string'
+        example: 'OCgEyaGcC8'
+      username:
+        type: 'string'
+        example: 'SJ100'
+      firstName:
+        type: 'string'
+        example: 'John'
+      lastName:
+        type: 'string'
+        example: Smith
+  Movie:
+    type: 'object'
+    properties:
+      id:
+        type: string
+        example: 'jCEMsgluBx'
+      title:
+        type: string
+        example: 'Avengers: Endgame'
+      description:
+        type: string
+        example: 'After the devastating events of...'
+      dateReleased:
+        type: 'string'
+        format: 'date-time'
+        example: '2020-10-20T20:02:09.404Z'
+  FavoriteMovie:
+    allOf:
+      - $ref: '#/definitions/Movie'
+      - type: 'object'
+        properties:
+          favoriteId:
+            type: string
+            example: '3ta1hbPWPx'
+  FavoriteMovieCorrelation:
+    type: 'object'
+    properties:
+      id:
+        type: string
+        example: '3ta1hbPWPx'
+      movieId:
+        type: string
+        example: 'P08ml5FIyD'
+      userId:
+        type: string
+        example: 'yE4X6ADFP7'
