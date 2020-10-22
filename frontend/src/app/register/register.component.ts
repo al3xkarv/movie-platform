@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { AuthenticationService } from "@app/_services";
+import { AuthenticationService } from '../_services/authentication.service';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -16,7 +16,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router // private authenticationService: AuthenticationService
+    private router: Router,
+    private authenticationService: AuthenticationService
   ) {
     // redirect to home if already logged in
     // if (this.authenticationService.currentUserValue) {
@@ -42,15 +43,26 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log(this.registerForm.value);
-    // this.authenticationService
-    //   .register(this.registerForm.value)
-    //   .pipe(first())
-    //   .subscribe({
-    //     next: () => {
-    //       this.router.navigate(["../login"], { relativeTo: this.route });
-    //     },
-    //   });
+    console.log(this.registerForm.value);
+    console.log(
+      this.f.firstName.value,
+      this.f.lastName.value,
+      this.f.username.value,
+      this.f.password.value
+    );
+    this.authenticationService
+      .register(
+        this.f.firstName.value,
+        this.f.lastName.value,
+        this.f.username.value,
+        this.f.password.value
+      )
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          // this.router.navigate(['../dashboard'], { relativeTo: this.route });
+        },
+      });
     //could have error manipulation
   }
 }
