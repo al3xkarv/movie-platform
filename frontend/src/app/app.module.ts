@@ -10,10 +10,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { appRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login';
+import { RegisterComponent } from './register/register.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent, RegisterComponent],
   imports: [
     MatSliderModule,
     MatInputModule,
