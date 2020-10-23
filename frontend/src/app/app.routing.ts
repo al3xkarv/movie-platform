@@ -2,6 +2,8 @@
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login';
+import { AllMoviesComponent } from './movies/all-movies/all-movies.component';
+import { FavoriteMoviesComponent } from './movies/favorite-movies/favorite-movies.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './_helpers';
 
@@ -10,6 +12,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent }, //canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'allmovies', component: AllMoviesComponent },
+
+  { path: 'favoritemovies', component: FavoriteMoviesComponent },
   // otherwise redirect to home
   { path: '**', redirectTo: '' },
 ];

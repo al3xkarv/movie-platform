@@ -1,17 +1,26 @@
 ﻿import { Component } from '@angular/core';
 import { first } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { User } from '../_models/user';
 import { UserService } from '../_services/user.service';
 import { AuthenticationService } from '../_services/authentication.service';
 
-@Component({ templateUrl: 'dashboard.component.html' })
+@Component({
+  selector: 'app-dashboard',
+  templateUrl: 'dashboard.component.html',
+  styleUrls: ['dashboard.css'],
+})
 export class DashboardComponent {
   // loading = false;
   // user: User = { firstName: 'aas', lastName: '', id: '', username: '' };
   firstName = '';
   lastName = '';
-  constructor(private userService: UserService) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private userService: UserService
+  ) {
     this.userService
       .getUser()
       .pipe(first())

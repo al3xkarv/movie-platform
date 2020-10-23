@@ -5,6 +5,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -18,6 +21,9 @@ import { DashboardComponent } from './dashboard';
 import { RegisterComponent } from './register/register.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AllMoviesComponent } from './movies/all-movies/all-movies.component';
+import { FavoriteMoviesComponent } from './movies/favorite-movies/favorite-movies.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +31,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
+    AllMoviesComponent,
+    FavoriteMoviesComponent,
+    NavBarComponent,
   ],
   imports: [
     MatSliderModule,
@@ -32,6 +41,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatCardModule,
     MatSlideToggleModule,
     MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
