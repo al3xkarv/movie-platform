@@ -24,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AllMoviesComponent } from './movies/all-movies/all-movies.component';
 import { FavoriteMoviesComponent } from './movies/favorite-movies/favorite-movies.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { AccountDetailsComponent } from './account-details/account-details.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     AllMoviesComponent,
     FavoriteMoviesComponent,
     NavBarComponent,
+    AccountDetailsComponent,
   ],
   imports: [
     MatSliderModule,

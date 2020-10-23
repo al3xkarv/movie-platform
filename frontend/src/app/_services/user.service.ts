@@ -11,4 +11,20 @@ export class UserService {
   getUser() {
     return this.http.get<any>(`${environment.apiUrl}/users/details`);
   }
+
+  updateUser(
+    user
+    // firstname: string,
+    // lastname: string,
+    // username: string,
+    // password: string
+  ) {
+    return this.http.put<any>(`${environment.apiUrl}/users/`, {
+      user,
+      // firstname: firstname,
+      // lastname: lastname,
+      // username: username,
+      // password: password,
+    });
+  }
 }
