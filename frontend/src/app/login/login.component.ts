@@ -10,6 +10,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
   submitted = false;
+  isChecked = true;
+  keepLogged = true;
   returnUrl: string;
   error = '';
 
@@ -49,17 +51,24 @@ export class LoginComponent implements OnInit {
       return;
     }
     // this.loading = true;
+    console.log(this.keepLogged);
     this.authenticationService
-      .login(this.f.username.value, this.f.password.value)
+      .login(this.f.username.value, this.f.password.value, this.keepLogged)
       .pipe(first())
       .subscribe(
-        // (data) => {
-        //   this.router.navigate(['../dashboard'], { relativeTo: this.route });
-        // },
+        () => {
+          this.router.navigate(['/']); //{ relativeTo: this.route });
+        },
         (error) => {
           this.error = error;
+          console.log(error);
           this.loading = false;
         }
       );
+    this.f.username.reset();
+    this.f.password.reset();
+  }
+  goRegister() {
+    this.router.navigate(['../register'], { relativeTo: this.route });
   }
 }

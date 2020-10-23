@@ -43,13 +43,13 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.registerForm.value);
-    console.log(
-      this.f.firstName.value,
-      this.f.lastName.value,
-      this.f.username.value,
-      this.f.password.value
-    );
+    // console.log(this.registerForm.value);
+    // console.log(
+    //   this.f.firstName.value,
+    //   this.f.lastName.value,
+    //   this.f.username.value,
+    //   this.f.password.value
+    // );
     this.authenticationService
       .register(
         this.f.firstName.value,

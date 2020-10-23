@@ -3,7 +3,7 @@
   Password: test
 </div>
 <mat-card>
-  <mat-card-title>Login to Movies Platform</mat-card-title>
+  <mat-card-title>Sign in to continue to Movies Platform</mat-card-title>
   <div class="card-body">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
@@ -36,16 +36,21 @@
           </div>
         </mat-form-field>
       </div>
-      <button [disabled]="loading" class="btn btn-primary">
+
+      <button mat-raised-button [disabled]="loading" class="btn btn-primary">
+        <!-- </mat-raised-button> > -->
         <span
           *ngIf="loading"
           class="spinner-border spinner-border-sm mr-1"
         ></span>
         Login
       </button>
+
       <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
         {{ error }}
       </div>
     </form>
+    <button mat-raised-button (click)="goRegister()">new user?</button><br />
+    <mat-slide-toggle [(ngModel)]="keepLogged">Stay signed in</mat-slide-toggle>
   </div>
 </mat-card>
