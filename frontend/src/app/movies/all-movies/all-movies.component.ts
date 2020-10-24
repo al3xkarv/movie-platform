@@ -31,4 +31,8 @@ export class AllMoviesComponent implements OnInit {
       .getMovies('')
       .subscribe((movies) => (this.movies = movies));
   }
+
+  favorite(id: string) {
+    this.moviesService.favoriteMovie(id).subscribe();
+  }
 }

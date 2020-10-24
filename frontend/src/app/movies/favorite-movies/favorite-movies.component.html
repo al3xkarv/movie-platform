@@ -1,3 +1,14 @@
 <app-nav-bar></app-nav-bar>
 
-<p>favorite-movies works!</p>
+<div class="grid grid-pad">
+  <a
+    *ngFor="let movie of movies"
+    class="col-1-4"
+    routerLink="../details"
+    [queryParams]="{ id: movie.id }"
+  >
+    <div class="module hero">
+      <h4>{{ movie.title }}</h4>
+    </div>
+  </a>
+</div>

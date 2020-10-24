@@ -18,6 +18,25 @@ export class MoviesService {
     return this.http.get<any>(`${environment.apiUrl}/movies?title=${title}`);
   }
 
+  getFavoriteMovies(title?: string) {
+    return this.http.get<any>(
+      `${environment.apiUrl}/users/favorites?title=${title}`
+    );
+  }
+
+  favoriteMovie(id: string) {
+    console.log(id);
+    return this.http
+      .post<any>(`${environment.apiUrl}/users/favorites`, {
+        movieId: id,
+      })
+      .pipe(
+        map((res) => {
+          console.log(res);
+        })
+      );
+  }
+
   getDetails(id: string) {
     return this.http.get<any>(`${environment.apiUrl}/movies/${id}`);
   }

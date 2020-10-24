@@ -1,16 +1,20 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="grid grid-pad">
-  <a
-    *ngFor="let movie of movies"
-    class="col-1-4"
-    routerLink="../details"
-    [queryParams]="{ id: movie.id }"
-  >
-    <div class="module hero">
-      <h4>{{ movie.title }}</h4>
-    </div>
-  </a>
+  <div *ngFor="let movie of movies">
+    <a routerLink="../details" [queryParams]="{ id: movie.id }">{{
+      movie.title
+    }}</a>
+
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+      (click)="favorite(movie.id)"
+    >
+      <mat-icon>favorite</mat-icon>
+    </button>
+  </div>
 </div>
 
 <!-- <mat-accordion>
