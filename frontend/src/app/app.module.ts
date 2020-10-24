@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -25,6 +26,7 @@ import { AllMoviesComponent } from './movies/all-movies/all-movies.component';
 import { FavoriteMoviesComponent } from './movies/favorite-movies/favorite-movies.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { AccountDetailsComponent } from './account-details/account-details.component';
+import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { AccountDetailsComponent } from './account-details/account-details.compo
     FavoriteMoviesComponent,
     NavBarComponent,
     AccountDetailsComponent,
+    MovieDetailsComponent,
   ],
   imports: [
     MatSliderModule,
@@ -46,6 +49,7 @@ import { AccountDetailsComponent } from './account-details/account-details.compo
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,
+    MatExpansionModule,
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,

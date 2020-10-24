@@ -7,6 +7,7 @@ import { FavoriteMoviesComponent } from './movies/favorite-movies/favorite-movie
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard, LoggedGuard } from './_helpers';
 import { AccountDetailsComponent } from './account-details/account-details.component';
+import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -32,8 +33,13 @@ const routes: Routes = [
     component: FavoriteMoviesComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'details',
+    component: MovieDetailsComponent,
+    canActivate: [AuthGuard],
+  },
   // otherwise redirect to home
-  { path: '**', redirectTo: '' },
+  // { path: '**', redirectTo: '' },
 ];
 
 export const appRoutingModule = RouterModule.forRoot(routes);
