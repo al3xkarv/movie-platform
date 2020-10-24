@@ -37,6 +37,18 @@ export class MoviesService {
       );
   }
 
+  deleteFavoriteMovie(id: string) {
+    console.log(id);
+    return this.http
+      .delete<any>(`${environment.apiUrl}/users/favorites/${id}`)
+      .pipe(
+        map((res) => {
+          console.log(res);
+          return res;
+        })
+      );
+  }
+
   getDetails(id: string) {
     return this.http.get<any>(`${environment.apiUrl}/movies/${id}`);
   }

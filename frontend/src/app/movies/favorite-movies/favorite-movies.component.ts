@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
-import { Movie } from '../../_models/Movie';
+import { Movie } from '../../_models/movie';
+import { FavoriteMovie } from '../../_models/favoritemovie';
 import { MoviesService } from '../../_services/movies.service';
 
 @Component({
@@ -12,10 +13,11 @@ export class FavoriteMoviesComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
   panelOpenState = false;
-  title: string;
-  description: string;
-  dateReleased: string;
-  movies: Movie[];
+  // title: string;
+  // description: string;
+  // dateReleased: string;
+  // movies: Movie[];
+  favoriteMovies: FavoriteMovie[];
 
   constructor(private moviesService: MoviesService) {}
 
@@ -29,6 +31,17 @@ export class FavoriteMoviesComponent implements OnInit {
   getFavoriteMovies(): void {
     this.moviesService
       .getFavoriteMovies('')
-      .subscribe((movies) => (this.movies = movies));
+      .subscribe((movies) => (this.favoriteMovies = movies));
+  }
+
+  deleteFavoriteMovie(id: string) {
+    this.moviesService
+      .deleteFavoriteMovie(id)
+      .subscribe(
+        (deletedMovie) =>
+          (this.favoriteMovies = this.favoriteMovies.filter(
+            (movie) => deletedMovie.id !== movie.favoriteId
+          ))
+      );
   }
 }
