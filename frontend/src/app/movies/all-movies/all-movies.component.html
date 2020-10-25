@@ -22,7 +22,7 @@
 </form> -->
 
 <div class="grid grid-pad">
-  <div *ngFor="let movie of movies">
+  <div *ngFor="let movie of movies; index as i">
     <a routerLink="../details" [queryParams]="{ id: movie.id }">{{
       movie.title
     }}</a>
@@ -52,7 +52,13 @@
     >
       <mat-icon>favorite</mat-icon>
     </button>
-
+    <button
+      mat-icon-button
+      aria-label="Example icon-button with menu icon"
+      (click)="deleteMovie(movie.id)"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
     <!-- <mat-accordion class="panel-header"> -->
     <mat-expansion-panel hideToggle class="panel-header">
       <mat-expansion-panel-header class="panel-header">
@@ -60,16 +66,6 @@
           ><mat-icon>edit</mat-icon>
         </mat-panel-title>
       </mat-expansion-panel-header>
-
-      <!-- <mat-form-field>
-    <mat-label>First name</mat-label>
-    <input matInput />
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Age</mat-label>
-    <input matInput type="number" min="1" />
-  </mat-form-field> -->
 
       <form
         [formGroup]="updateForm"
@@ -92,7 +88,6 @@
               type="text"
               formControlName="title"
               class="form-control"
-              [ngModel]="movie.title"
               [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
             />
             <div
@@ -110,10 +105,10 @@
               #description
               matInput
               [placeholder]="this.movie.description"
+              [value]="movie.description"
               type="text"
               formControlName="description"
               class="form-control"
-              [ngModel]="movie.description"
               [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
             />
             <div
@@ -131,7 +126,6 @@
               #dateReleased
               matInput
               [placeholder]="movie.dateReleased"
-              [ngModel]="movie.dateReleased"
               type="datetime-local"
               formControlName="dateReleased"
               class="form-control"

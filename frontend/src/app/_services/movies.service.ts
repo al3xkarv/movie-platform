@@ -54,18 +54,9 @@ export class MoviesService {
       );
   }
 
-  updateMovie(
-    title: string,
-    description: string,
-    dateReleased: string,
-    id: string
-  ) {
+  updateMovie(movieUpdate, id) {
     return this.http
-      .put<any>(`${environment.apiUrl}/movies/${id}`, {
-        title: title,
-        description: description,
-        dateReleased: dateReleased,
-      })
+      .put<any>(`${environment.apiUrl}/movies/${id}`, movieUpdate)
       .pipe(
         map((updatedMovie) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -73,6 +64,7 @@ export class MoviesService {
         })
       );
   }
+
   deleteMovie(id: string) {
     console.log(id);
     return this.http.delete<any>(`${environment.apiUrl}/movies/${id}`).pipe(

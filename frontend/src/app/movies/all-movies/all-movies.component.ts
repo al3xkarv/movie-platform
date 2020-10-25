@@ -2,7 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
 import { Movie } from '../../_models/Movie';
 import { FavoriteMovie } from '../../_models/favoritemovie';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormArray,
+  FormControl,
+} from '@angular/forms';
 
 import { MoviesService } from '../../_services/movies.service';
 
@@ -26,13 +32,6 @@ export class AllMoviesComponent implements OnInit {
   searchForm: FormGroup;
   addForm: FormGroup;
   updateForm: FormGroup;
-  // private searchTerms = new Subject<string>();
-
-  //  = {id:"", title: "",
-  // description: "",
-  // dateReleased: "",
-  // favoriteId: ""};
-  // array: object[];
 
   constructor(
     private moviesService: MoviesService,
@@ -59,7 +58,7 @@ export class AllMoviesComponent implements OnInit {
     });
   }
 
-  ngOnChanges() {}
+  // ngOnChanges() {}
 
   getMovies(): void {
     this.moviesService
@@ -106,38 +105,48 @@ export class AllMoviesComponent implements OnInit {
     dateReleased: string,
     id: string
   ) {
-    // let dirtyValues = {};
+    let dirtyValues = {};
 
-    // Object.keys(this.updateForm.controls).forEach((key) => {
-    //   let currentControl = this.updateForm.controls[key];
+    Object.keys(this.updateForm.controls).forEach((key) => {
+      let currentControl = this.updateForm.controls[key];
 
-    //   if (currentControl.dirty) {
-    //     // if (currentControl.controls)
-    //     //     dirtyValues[key] = this.getDirtyValues(currentControl);
-    //     // else
-    //     dirtyValues[key] = currentControl.value;
-    //   }
-    // });
+      if (currentControl.dirty) {
+        // if (currentControl.controls)
+        //     dirtyValues[key] = this.getDirtyValues(currentControl);
+        // else
+        dirtyValues[key] = currentControl.value;
+      }
+    });
+    for (const key in dirtyValues) {
+      console.log(key);
+      console.log(dirtyValues[key]);
+      if (dirtyValues.hasOwnProperty('title')) {
+        if (dirtyValues[key] == title) {
+          // deleteFromObject('checkbox_description', myObject);
+          delete dirtyValues[key];
+        }
+        // your logic here
+      }
+    }
+    // const ddirtyValues = filter(dirtyValues, ) filter(dirtyValues, (_, fruit) => fruit.title==title);
+    console.log(dirtyValues);
 
-    // console.log(dirtyValues);
-
-    this.moviesService
-      .updateMovie(title, description, dateReleased, id)
-      .subscribe();
+    this.moviesService.updateMovie(dirtyValues, id).subscribe();
     // next: () => {
     //   // this.router.navigate(['../dashboard'], { relativeTo: this.route });
     // },
+    this.updateForm.reset();
+
     this.getMovies();
   }
 
   deleteMovie(id: string) {
-    //   {this.moviesService
-    //     .deleteFavoriteMovie(id)
-    //     .subscribe(
-    //       (deletedMovie) =>
-    //         (this.favoriteMovies = this.favoriteMovies.filter(
-    //          )
-    //     );
+    this.moviesService.deleteMovie(id).subscribe((deletedMovie) => {
+      // this.favoriteMovies = this.favoriteMovies.filter(
+      //   (movie) => deletedMovie.id !== movie.favoriteId);
+      this.movies = this.movies.filter((movie) => deletedMovie.id !== movie.id);
+    });
+    this.getMovies();
   }
 
   searchMovies(title) {
