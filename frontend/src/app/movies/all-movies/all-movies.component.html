@@ -1,10 +1,40 @@
 <app-nav-bar></app-nav-bar>
 
+<!-- <input #searchBox id="search-box" (keyup)="search(searchBox.value)" /> -->
+<!-- <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <div class="form-group"> -->
+<input
+  #searchBox
+  type="search"
+  formControlName="search"
+  placeholder="search"
+  (keyup)="searchMovies(searchBox.value)"
+  class="form-control"
+/>
+<!-- <button
+      mat-icon-button
+      class="search-button"
+      aria-label="Example icon-button with menu icon"
+    >
+      <mat-icon>search</mat-icon>
+    </button> -->
+<!-- </div>
+</form> -->
+
 <div class="grid grid-pad">
   <div *ngFor="let movie of movies">
     <a routerLink="../details" [queryParams]="{ id: movie.id }">{{
       movie.title
     }}</a>
+
+    <!-- <button
+      mat-icon-button
+      class="edit-icon-red"
+      aria-label="Example icon-button with menu icon"
+      (click)="favorite(movie.id)"
+    >
+      <mat-icon>edit</mat-icon>
+    </button> -->
 
     <button
       mat-icon-button
@@ -25,26 +55,160 @@
   </div>
 </div>
 
-<!-- <mat-accordion>
-  <mat-expansion-panel hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title> This is the expansion title </mat-panel-title>
-      <mat-panel-description>
-        This is a summary of the content
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <p>This is the primary content of the panel.</p>
-  </mat-expansion-panel>
-  <mat-expansion-panel
-    (opened)="panelOpenState = true"
-    (closed)="panelOpenState = false"
+<!-- <mat-accordion class="panel-header"> -->
+<mat-expansion-panel hideToggle class="panel-header">
+  <mat-expansion-panel-header class="panel-header">
+    <mat-panel-title class="panel-header"
+      ><mat-icon>edit</mat-icon>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <!-- <mat-form-field>
+    <mat-label>First name</mat-label>
+    <input matInput />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Age</mat-label>
+    <input matInput type="number" min="1" />
+  </mat-form-field> -->
+
+  <form
+    [formGroup]="updateForm"
+    (ngSubmit)="updateMovie(title.value, description.value, dateReleased.value)"
   >
-    <mat-expansion-panel-header>
-      <mat-panel-title> Self aware panel </mat-panel-title>
-      <mat-panel-description>
-        Currently I am {{ panelOpenState ? "open" : "closed" }}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <p>I'm visible because I am open</p>
-  </mat-expansion-panel>
-</mat-accordion> -->
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label for="title">Title</mat-label>
+        <input
+          #title
+          matInput
+          type="text"
+          formControlName="title"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+        />
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+          <div *ngIf="f.username.errors.required">Username is required</div>
+        </div>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label for="description">Description</mat-label>
+        <input
+          matInput
+          #description
+          type="text"
+          formControlName="description"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+        />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+        </div>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label for="dateReleased">Date Released</mat-label>
+        <input
+          matInput
+          #dateReleased
+          type="datetime-local"
+          formControlName="dateReleased"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+        />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+        </div>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button class="btn btn-primary">
+      <!-- </mat-raised-button> > -->
+
+      Update
+    </button>
+    <!-- <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
+      {{ error }}
+    </div> -->
+  </form>
+</mat-expansion-panel>
+<!-- </mat-accordion> -->
+<mat-expansion-panel hideToggle class="panel-header">
+  <mat-expansion-panel-header class="panel-header">
+    <mat-panel-title class="panel-header"
+      ><mat-icon>add</mat-icon>Add movie
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <!-- <mat-form-field>
+    <mat-label>First name</mat-label>
+    <input matInput />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Age</mat-label>
+    <input matInput type="number" min="1" />
+  </mat-form-field> -->
+
+  <form [formGroup]="addForm" (ngSubmit)="addMovie()">
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label for="title">Title</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="title"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+        />
+        <!-- <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+          <div *ngIf="f.username.errors.required">Username is required</div>
+        </div> -->
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label for="description">Description</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="description"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+        />
+        <!-- <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+        </div> -->
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label for="dateReleased">Date Released</mat-label>
+        <input
+          matInput
+          type="datetime-local"
+          formControlName="dateReleased"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+        />
+        <!-- <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+        </div> -->
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button class="btn btn-primary">
+      <!-- </mat-raised-button> > -->
+
+      Add
+    </button>
+    <!-- <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
+      {{ error }}
+    </div> -->
+  </form>
+</mat-expansion-panel>
+<!-- </mat-accordion> -->

@@ -34,6 +34,18 @@ export class FavoriteMoviesComponent implements OnInit {
       .subscribe((movies) => (this.favoriteMovies = movies));
   }
 
+  // search(searchTerm) {
+  //   this.favoriteMovies = this.favoriteMovies.filter((movie) =>
+  //     movie.title.includes(searchTerm)
+  //   );
+  // }
+  searchMovies(title) {
+    this.moviesService
+      .getFavoriteMovies(title)
+      .subscribe((movies) => (this.favoriteMovies = movies));
+    // this.getFavoriteMovies();
+  }
+
   deleteFavoriteMovie(id: string) {
     this.moviesService
       .deleteFavoriteMovie(id)

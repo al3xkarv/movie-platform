@@ -1,13 +1,25 @@
 .heart-icon-red {
   color: red;
 }
-/* .heart-icon:focus {
-  color: black;
-} */
+
+.edit-icon-red {
+  color: blue;
+}
 
 .example-headers-align .mat-expansion-panel-header-title,
 .example-headers-align .mat-expansion-panel-header-description {
   flex-basis: 0;
+}
+
+/* ::ng-deep .mat-expansion-panel-header { */
+/* size: 20px; */
+/* display: flex;
+  flex-wrap: wrap; */
+/* } */
+.panel-header {
+  display: flex;
+  flex-wrap: wrap;
+  /* size: 20px; */
 }
 
 .example-headers-align .mat-expansion-panel-header-description {

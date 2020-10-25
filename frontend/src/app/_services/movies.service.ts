@@ -36,6 +36,39 @@ export class MoviesService {
     // );
   }
 
+  addMovie(title: string, description: string, dateReleased: string) {
+    // console.log('authService');
+    return this.http
+      .post<any>(`${environment.apiUrl}/movies`, {
+        title: title,
+        description: description,
+        dateReleased: dateReleased,
+      })
+      .pipe(
+        map((movie) => {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          // localStorage.setItem('currentUser', JSON.stringify(user));
+          // this.currentUserSubject.next(user);
+          return movie;
+        })
+      );
+  }
+
+  updateMovie(title: string, description: string, dateReleased: string) {
+    return this.http
+      .put<any>(`${environment.apiUrl}/users/`, {
+        // {user.firstname, },
+        title: title,
+        description: description,
+        dateReleased: dateReleased,
+      })
+      .pipe(
+        map((updatedMovie) => {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          return updatedMovie;
+        })
+      );
+  }
   deleteFavoriteMovie(id: string) {
     console.log(id);
     return this.http
