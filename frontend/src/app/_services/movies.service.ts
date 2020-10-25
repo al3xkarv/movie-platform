@@ -26,15 +26,14 @@ export class MoviesService {
 
   favoriteMovie(id: string) {
     console.log(id);
-    return this.http
-      .post<any>(`${environment.apiUrl}/users/favorites`, {
-        movieId: id,
-      })
-      .pipe(
-        map((res) => {
-          console.log(res);
-        })
-      );
+    return this.http.post<any>(`${environment.apiUrl}/users/favorites`, {
+      movieId: id,
+    });
+    // .pipe(
+    //   map((res) => {
+    //     console.log(res);
+    //   })
+    // );
   }
 
   deleteFavoriteMovie(id: string) {

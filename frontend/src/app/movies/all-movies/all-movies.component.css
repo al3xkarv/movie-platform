@@ -1,6 +1,9 @@
-.example-action-buttons {
-  padding-bottom: 20px;
+.heart-icon-red {
+  color: red;
 }
+/* .heart-icon:focus {
+  color: black;
+} */
 
 .example-headers-align .mat-expansion-panel-header-title,
 .example-headers-align .mat-expansion-panel-header-description {

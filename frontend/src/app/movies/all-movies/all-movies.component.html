@@ -8,9 +8,17 @@
 
     <button
       mat-icon-button
-      class="example-icon"
+      class="heart-icon-red"
       aria-label="Example icon-button with menu icon"
       (click)="favorite(movie.id)"
+    >
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      class="heart-icon-black"
+      aria-label="Example icon-button with menu icon"
+      (click)="unfavorite(movie.id)"
     >
       <mat-icon>favorite</mat-icon>
     </button>
