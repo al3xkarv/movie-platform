@@ -57,25 +57,6 @@ export class AllMoviesComponent implements OnInit {
       description: ['', Validators.required],
       dateReleased: ['', Validators.required],
     });
-
-    // this.movies = this.searchTerms.pipe(
-    //   debounceTime(300), // wait for 300ms pause in events
-    //   distinctUntilChanged(), // ignore if next search term is same as previous
-    //   switchMap(
-    //     term =>
-    //       term // switch to new observable each time
-    //         ? // return the http search observable
-    //           this.heroSearchService.search(term)
-    //         : // or the observable of empty heroes if no search term
-    //           of<Hero[]>([])
-    //   ),
-    //   catchError(error => {
-    //     // TODO: real error handling
-    //     console.log(`Error in component ... ${error}`);
-    //     return of<Hero[]>([]);
-    //   })
-    // );
-    // this.getActors();
   }
 
   ngOnChanges() {}
@@ -104,7 +85,8 @@ export class AllMoviesComponent implements OnInit {
   //   );
   // }
 
-  addMovie() { // title:string, description:string, dateReleased:string
+  addMovie() {
+    // title:string, description:string, dateReleased:string
     this.moviesService
       .addMovie(
         this.a.title.value,
@@ -118,7 +100,45 @@ export class AllMoviesComponent implements OnInit {
     this.getMovies();
   }
 
-  updateMovie(title: string, description: string, dateReleased: string) {}
+  updateMovie(
+    title: string,
+    description: string,
+    dateReleased: string,
+    id: string
+  ) {
+    // let dirtyValues = {};
+
+    // Object.keys(this.updateForm.controls).forEach((key) => {
+    //   let currentControl = this.updateForm.controls[key];
+
+    //   if (currentControl.dirty) {
+    //     // if (currentControl.controls)
+    //     //     dirtyValues[key] = this.getDirtyValues(currentControl);
+    //     // else
+    //     dirtyValues[key] = currentControl.value;
+    //   }
+    // });
+
+    // console.log(dirtyValues);
+
+    this.moviesService
+      .updateMovie(title, description, dateReleased, id)
+      .subscribe();
+    // next: () => {
+    //   // this.router.navigate(['../dashboard'], { relativeTo: this.route });
+    // },
+    this.getMovies();
+  }
+
+  deleteMovie(id: string) {
+    //   {this.moviesService
+    //     .deleteFavoriteMovie(id)
+    //     .subscribe(
+    //       (deletedMovie) =>
+    //         (this.favoriteMovies = this.favoriteMovies.filter(
+    //          )
+    //     );
+  }
 
   searchMovies(title) {
     this.moviesService

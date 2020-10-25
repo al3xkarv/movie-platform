@@ -54,10 +54,14 @@ export class MoviesService {
       );
   }
 
-  updateMovie(title: string, description: string, dateReleased: string) {
+  updateMovie(
+    title: string,
+    description: string,
+    dateReleased: string,
+    id: string
+  ) {
     return this.http
-      .put<any>(`${environment.apiUrl}/users/`, {
-        // {user.firstname, },
+      .put<any>(`${environment.apiUrl}/movies/${id}`, {
         title: title,
         description: description,
         dateReleased: dateReleased,
@@ -69,6 +73,16 @@ export class MoviesService {
         })
       );
   }
+  deleteMovie(id: string) {
+    console.log(id);
+    return this.http.delete<any>(`${environment.apiUrl}/movies/${id}`).pipe(
+      map((res) => {
+        console.log(res);
+        return res;
+      })
+    );
+  }
+
   deleteFavoriteMovie(id: string) {
     console.log(id);
     return this.http

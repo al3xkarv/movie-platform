@@ -4,6 +4,7 @@ import { UserService } from '../_services';
 import { Location } from '@angular/common';
 import { User } from '../_models';
 import { map } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-account-details',
@@ -16,9 +17,11 @@ export class AccountDetailsComponent implements OnInit {
   lastname: string;
   username: string;
   newPassword: string;
+  updateForm: FormGroup;
   // public currentUser: Observable<any>;
 
   constructor(
+    private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private userService: UserService,
     private location: Location
@@ -26,13 +29,45 @@ export class AccountDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     // const
-    this.user = this.authenticationService.currentUserValue.user;
-    // console.log(user);
-    this.firstname = this.user.firstname;
+    // this.user = this.authenticationService.currentUserValue.user;
+    this.getUser();
+    // this.userService
+    // .getUser()
+    // .subscribe((user) => {
+    //   // this.loading = false;
+    //   console.log(user);
+    //   console.log('testng dashboard get');
+    //   // console.log(user)
+    //   // this.user = user;
+    //   this.user = user;
+    // });
 
-    console.log(this.firstname);
+    console.log(this.user);
+    // console.log(user);
+    // this.firstname = this.user.firstname;
+    this.updateForm = this.formBuilder.group({
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+    // console.log(this.firstname);
   }
 
+  get f() {
+    return this.updateForm.controls;
+  }
+
+  getUser() {
+    this.userService.getUser().subscribe((user) => {
+      // this.loading = false;
+      console.log(user);
+      console.log('testng dashboard get');
+      // console.log(user)
+      // this.user = user;
+      this.user = user;
+    });
+  }
   goBack(): void {
     // this.firstname = '';
     // this.lastname = '';
@@ -42,19 +77,30 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   update() {
-    console.log(this.user);
+    let dirtyValues = {};
+
+    Object.keys(this.updateForm.controls).forEach((key) => {
+      let currentControl = this.updateForm.controls[key];
+
+      if (currentControl.dirty) {
+        // if (currentControl.controls)
+        //     dirtyValues[key] = this.getDirtyValues(currentControl);
+        // else
+        dirtyValues[key] = currentControl.value;
+      } else {
+      }
+    });
+    console.log(dirtyValues);
+
+    // console.log(this.user);
     this.authenticationService
-      .updateUser(
-        this.user.firstname,
-        this.user.lastname,
-        this.user.username,
-        this.newPassword
-      )
+      .updateUser(dirtyValues)
       .pipe()
       .subscribe({
         next: () => {
           // this.router.navigate(['../dashboard'], { relativeTo: this.route });
         },
       });
+    this.getUser();
   }
 }

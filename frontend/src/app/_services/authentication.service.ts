@@ -68,23 +68,14 @@ export class AuthenticationService {
 
   //TODO update localStorage
   updateUser(
-    firstname,
-    lastname,
-    username,
-    password
+    valueschanged
     // firstname: string,
     // lastname: string,
     // username: string,
     // password: string
   ) {
     return this.http
-      .put<any>(`${environment.apiUrl}/users/`, {
-        // {user.firstname, },
-        firstname: firstname,
-        lastname: lastname,
-        username: username,
-        password: password,
-      })
+      .put<any>(`${environment.apiUrl}/users/`, valueschanged)
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
