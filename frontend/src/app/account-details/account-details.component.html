@@ -49,35 +49,8 @@
       </mat-form-field>
     </div>
 
-    <button mat-raised-button class="btn btn-primary">
-      <!-- </mat-raised-button> > -->
-
-      Update
-    </button>
+    <button mat-raised-button class="btn btn-primary">Update</button>
   </form>
 </div>
-<label
-  >Firstname:
-  <input [(ngModel)]="user.firstname" placeholder="firstname" />
-</label>
-<br />
-<label
-  >Lastname:
-  <input [(ngModel)]="user.lastname" placeholder="lastname" />
-</label>
-<br />
-
-<label
-  >Username:
-  <input [(ngModel)]="user.username" placeholder="username" />
-</label>
-<br />
-
-<label
-  >New password:
-  <input type="password" [(ngModel)]="newPassword" placeholder="new password" />
-</label>
-<br />
 
 <button mat-raised-button (click)="goBack()">go back</button>
-<button mat-raised-button (click)="update()">Update</button>
