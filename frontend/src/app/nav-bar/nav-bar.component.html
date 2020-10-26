@@ -3,17 +3,6 @@
     <span>Movies Platform</span>
   </mat-toolbar-row>
   <mat-toolbar-row>
-    <!-- <button
-      mat-icon-button
-      [matMenuTriggerFor]="menu"
-      class="example-icon"
-      aria-label="Example icon-button with menu icon"
-    >
-      <mat-icon>account_circle</mat-icon>
-      Movies Platform
-    </button> -->
-
-    <!-- check -->
     <span class="example-spacer"></span>
     <button
       mat-icon-button
@@ -52,20 +41,11 @@
     >
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="goAccountDetails()">
-        <!-- <mat-icon></mat-icon> -->
         <span>Account Details</span>
       </button>
-
       <button mat-menu-item (click)="logout()">
-        <!-- <mat-icon>notifications_off</mat-icon> -->
         <span>Logout</span>
       </button>
     </mat-menu>
-    <!-- <mat-icon
-      class="example-icon"
-      aria-hidden="false"
-      aria-label="Example delete icon"
-      >delete</mat-icon
-    > -->
   </mat-toolbar-row>
 </mat-toolbar>

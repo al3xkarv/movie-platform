@@ -43,37 +43,36 @@ export class AuthenticationService {
   }
 
   register(
-    firstname: string,
-    lastname: string,
-    username: string,
-    password: string
-  ) {
-    console.log('authService');
-    return this.http
-      .post<any>(`${environment.apiUrl}/users`, {
-        firstname: firstname,
-        lastname: lastname,
-        username: username,
-        password: password,
-      })
-      .pipe(
-        map((user) => {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-          return user;
-        })
-      );
-  }
-
-  //TODO update localStorage
-  updateUser(
-    valueschanged
+    user
     // firstname: string,
     // lastname: string,
     // username: string,
     // password: string
   ) {
+    console.log('authService');
+    return (
+      this.http
+        .post<any>(`${environment.apiUrl}/users`, user)
+
+        // {
+        //   firstname: firstname,
+        //   lastname: lastname,
+        //   username: username,
+        //   password: password,
+        // })
+        .pipe(
+          map((user) => {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            this.currentUserSubject.next(user);
+            return user;
+          })
+        )
+    );
+  }
+
+  //TODO update localStorage
+  updateUser(valueschanged) {
     return this.http
       .put<any>(`${environment.apiUrl}/users/`, valueschanged)
       .pipe(

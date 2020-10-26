@@ -1,5 +1,4 @@
 ﻿import { Routes, RouterModule } from '@angular/router';
-
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login';
 import { AllMoviesComponent } from './movies/all-movies/all-movies.component';
@@ -17,7 +16,6 @@ const routes: Routes = [
     component: RegisterComponent,
     canActivate: [LoggedGuard],
   },
-  // { path: 'dashboard', component: DashboardComponent },
   {
     path: 'accountdetails',
     component: AccountDetailsComponent,
@@ -38,8 +36,7 @@ const routes: Routes = [
     component: MovieDetailsComponent,
     canActivate: [AuthGuard],
   },
-  // otherwise redirect to home
-  // { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: '' },
 ];
 
 export const appRoutingModule = RouterModule.forRoot(routes);

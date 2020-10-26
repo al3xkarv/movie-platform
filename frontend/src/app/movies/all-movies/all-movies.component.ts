@@ -22,10 +22,6 @@ export class AllMoviesComponent implements OnInit {
 
   submitted = false;
   panelOpenState = false;
-  // title: string;
-
-  // description: string;
-  // dateReleased: string;
   movies: Movie[];
   favoriteMovies: FavoriteMovie[];
   favoriteMoviesTemp: FavoriteMovie[];
@@ -58,8 +54,6 @@ export class AllMoviesComponent implements OnInit {
     });
   }
 
-  // ngOnChanges() {}
-
   getMovies(): void {
     this.moviesService
       .getMovies('')
@@ -73,19 +67,7 @@ export class AllMoviesComponent implements OnInit {
       .subscribe((movies) => (this.favoriteMovies = movies));
   }
 
-  // search(term: string): void {
-  // Push a search term into the observable stream.
-  //   this.searchTerms.next(term);
-  // }
-
-  // search(searchTerm) {
-  //   this.movies = this.movies.filter((movie) =>
-  //     movie.title.includes(searchTerm)
-  //   );
-  // }
-
   addMovie() {
-    // title:string, description:string, dateReleased:string
     this.moviesService
       .addMovie(
         this.a.title.value,

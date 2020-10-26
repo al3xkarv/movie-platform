@@ -1,0 +1,11 @@
+.card {
+  max-width: 400px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+}
+
+.register-bt {
+  margin: 10px;
+}
