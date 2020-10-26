@@ -1,12 +1,20 @@
 <app-nav-bar></app-nav-bar>
-<input
-  #searchBox
-  type="search"
-  formControlName="search"
-  placeholder="search"
-  (keyup)="searchMovies(searchBox.value)"
-  class="form-control"
-/>
+<form action="" class="search-bar">
+  <input
+    #searchBox
+    type="text"
+    formControlName="search"
+    (keyup)="searchMovies(searchBox.value)"
+    class="search-box"
+    required
+    name="search"
+    pattern=".*\S.*"
+  />
+
+  <button class="search-btn" type="submit">
+    <span>Search</span>
+  </button>
+</form>
 <div *ngFor="let movie of favoriteMovies">
   <a class="col-1-4" routerLink="../details" [queryParams]="{ id: movie.id }">
     <span>{{ movie.title }}</span>

@@ -1,40 +1,27 @@
 <app-nav-bar></app-nav-bar>
 
-<!-- <input #searchBox id="search-box" (keyup)="search(searchBox.value)" /> -->
-<!-- <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-  <div class="form-group"> -->
-<input
-  #searchBox
-  type="search"
-  formControlName="search"
-  placeholder="search"
-  (keyup)="searchMovies(searchBox.value)"
-  class="form-control"
-/>
-<!-- <button
-      mat-icon-button
-      class="search-button"
-      aria-label="Example icon-button with menu icon"
-    >
-      <mat-icon>search</mat-icon>
-    </button> -->
-<!-- </div>
-</form> -->
+<form action="" class="search-bar">
+  <input
+    #searchBox
+    type="text"
+    formControlName="search"
+    (keyup)="searchMovies(searchBox.value)"
+    class="search-box"
+    required
+    name="search"
+    pattern=".*\S.*"
+  />
+
+  <button class="search-btn" type="submit">
+    <span>Search</span>
+  </button>
+</form>
 
 <div class="grid grid-pad">
   <div *ngFor="let movie of movies; index as i">
     <a routerLink="../details" [queryParams]="{ id: movie.id }">{{
       movie.title
     }}</a>
-
-    <!-- <button
-      mat-icon-button
-      class="edit-icon-red"
-      aria-label="Example icon-button with menu icon"
-      (click)="favorite(movie.id)"
-    >
-      <mat-icon>edit</mat-icon>
-    </button> -->
 
     <button
       mat-icon-button
@@ -59,7 +46,6 @@
     >
       <mat-icon>delete</mat-icon>
     </button>
-    <!-- <mat-accordion class="panel-header"> -->
     <mat-expansion-panel hideToggle class="panel-header">
       <mat-expansion-panel-header class="panel-header">
         <mat-panel-title class="panel-header"
@@ -140,21 +126,13 @@
           </mat-form-field>
         </div>
 
-        <button mat-raised-button class="btn btn-primary">
-          <!-- </mat-raised-button> > -->
-
-          Update
-        </button>
-        <!-- <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
-      {{ error }}
-    </div> -->
+        <button mat-raised-button class="btn btn-primary">Update</button>
       </form>
     </mat-expansion-panel>
   </div>
 </div>
 
 <div class="add-movie">
-  <!-- </mat-accordion> -->
   <mat-expansion-panel hideToggle class="panel-header">
     <mat-expansion-panel-header class="panel-header">
       <mat-panel-title class="panel-header"
@@ -172,9 +150,6 @@
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
           />
-          <!-- <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-          <div *ngIf="f.username.errors.required">Username is required</div>
-        </div> -->
         </mat-form-field>
       </div>
       <div class="form-group">
@@ -187,9 +162,6 @@
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
           />
-          <!-- <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-          <div *ngIf="f.password.errors.required">Password is required</div>
-        </div> -->
         </mat-form-field>
       </div>
       <div class="form-group">
@@ -202,21 +174,10 @@
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
           />
-          <!-- <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-          <div *ngIf="f.password.errors.required">Password is required</div>
-        </div> -->
         </mat-form-field>
       </div>
 
-      <button mat-raised-button class="btn btn-primary">
-        <!-- </mat-raised-button> > -->
-
-        Add
-      </button>
-      <!-- <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
-      {{ error }}
-    </div> -->
+      <button mat-raised-button class="btn btn-primary">Add</button>
     </form>
   </mat-expansion-panel>
-  <!-- </mat-accordion> -->
 </div>

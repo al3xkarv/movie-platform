@@ -3,7 +3,6 @@ import { AuthenticationService } from '../_services';
 import { UserService } from '../_services';
 import { Location } from '@angular/common';
 import { User } from '../_models';
-import { map } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({

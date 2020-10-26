@@ -29,15 +29,9 @@ export class MoviesService {
     return this.http.post<any>(`${environment.apiUrl}/users/favorites`, {
       movieId: id,
     });
-    // .pipe(
-    //   map((res) => {
-    //     console.log(res);
-    //   })
-    // );
   }
-
+  //TODO use Movie interface
   addMovie(title: string, description: string, dateReleased: string) {
-    // console.log('authService');
     return this.http
       .post<any>(`${environment.apiUrl}/movies`, {
         title: title,

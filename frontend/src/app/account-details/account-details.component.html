@@ -1,5 +1,6 @@
 <app-nav-bar></app-nav-bar>
-<div>
+<mat-card class="card">
+  <mat-card-title>Edit profile</mat-card-title>
   <form [formGroup]="updateForm" (ngSubmit)="update()">
     <div class="form-group">
       <mat-form-field>
@@ -49,8 +50,9 @@
       </mat-form-field>
     </div>
 
-    <button mat-raised-button class="btn btn-primary">Update</button>
+    <button mat-raised-button class="update-bt">Update</button>
   </form>
-</div>
-
-<button mat-raised-button (click)="goBack()">go back</button>
+  <button mat-raised-button (click)="goBack()" class="goback-bt">
+    go back
+  </button>
+</mat-card>

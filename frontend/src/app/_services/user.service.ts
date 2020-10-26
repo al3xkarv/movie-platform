@@ -12,24 +12,7 @@ export class UserService {
     return this.http.get<any>(`${environment.apiUrl}/users/details`);
   }
 
-  updateUser(
-    user
-    // firstname: string,
-    // lastname: string,
-    // username: string,
-    // password: string
-  ) {
-    // return this.http.put<any>(`${environment.apiUrl}/users/`, {
-    //   user,
-    // firstname: firstname,
-    // lastname: lastname,
-    // username: username,
-    // password: password,
-    // })   .pipe(
-    //   map((user) => {
-    //     // store user details and jwt token in local storage to keep user logged in between page refreshes
-    //     return user;
-    //   })
-    // );
+  updateUser(user) {
+    return this.http.put<any>(`${environment.apiUrl}/users/`, user);
   }
 }

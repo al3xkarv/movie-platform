@@ -42,33 +42,19 @@ export class AuthenticationService {
       );
   }
 
-  register(
-    user
-    // firstname: string,
-    // lastname: string,
-    // username: string,
-    // password: string
-  ) {
+  register(user) {
     console.log('authService');
-    return (
-      this.http
-        .post<any>(`${environment.apiUrl}/users`, user)
+    return this.http
+      .post<any>(`${environment.apiUrl}/users`, user)
 
-        // {
-        //   firstname: firstname,
-        //   lastname: lastname,
-        //   username: username,
-        //   password: password,
-        // })
-        .pipe(
-          map((user) => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            this.currentUserSubject.next(user);
-            return user;
-          })
-        )
-    );
+      .pipe(
+        map((user) => {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(user);
+          return user;
+        })
+      );
   }
 
   //TODO update localStorage

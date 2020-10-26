@@ -1,0 +1,13 @@
+.card {
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+}
+
+.update-bt {
+  margin: 10px;
+}
+.goback-bt {
+  margin: 10px;
+}
