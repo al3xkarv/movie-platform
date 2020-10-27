@@ -33,7 +33,10 @@ export class AuthenticationService {
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           if (!keepLogged) {
-            return;
+            sessionStorage.setItem('currentUser', JSON.stringify(user));
+            this.currentUserSubject.next(user);
+            return user;
+            // return;
           }
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
@@ -43,7 +46,6 @@ export class AuthenticationService {
   }
 
   register(user) {
-    console.log('authService');
     return this.http
       .post<any>(`${environment.apiUrl}/users`, user)
 
