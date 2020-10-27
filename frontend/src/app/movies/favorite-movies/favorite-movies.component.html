@@ -17,6 +17,7 @@
 </form>
 <div *ngFor="let movie of favoriteMovies">
   <a class="col-1-4" routerLink="../details" [queryParams]="{ id: movie.id }">
+    <mat-icon>movie</mat-icon>
     <span>{{ movie.title }}</span>
   </a>
   <button

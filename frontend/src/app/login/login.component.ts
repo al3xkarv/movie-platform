@@ -23,21 +23,13 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService
-  ) {
-    // redirect to home if already logged in
-    // if (this.authenticationService.currentUserValue) {
-    //     this.router.navigate(['/']);
-    // }
-  }
+  ) {}
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
-
-    // get return url from route parameters or default to '/'
-    // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   // convenience getter for easy access to form fields
@@ -48,19 +40,14 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     console.log('testing login forms');
     // this.submitted = true;
-    // // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      console.log('onSubmit this form is invalid');
-      return;
-    }
-    // this.loading = true;
+
     console.log(this.keepLogged);
     this.authenticationService
       .login(this.f.username.value, this.f.password.value, this.keepLogged)
       .pipe(first())
       .subscribe(
         () => {
-          this.router.navigate(['/']); //{ relativeTo: this.route });
+          this.router.navigate(['/']);
         },
         (error) => {
           this.error = error;
@@ -68,6 +55,7 @@ export class LoginComponent implements OnInit {
           this.loading = false;
         }
       );
+    console.log(this.loginForm.hasError('required'));
     this.f.username.reset();
     this.f.password.reset();
   }

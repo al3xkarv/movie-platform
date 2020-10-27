@@ -19,6 +19,7 @@
 
 <div class="grid grid-pad">
   <div *ngFor="let movie of movies; index as i">
+    <mat-icon>movie</mat-icon>
     <a routerLink="../details" [queryParams]="{ id: movie.id }">{{
       movie.title
     }}</a>

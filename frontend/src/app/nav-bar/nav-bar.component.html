@@ -3,42 +3,18 @@
     <span>Movies Platform</span>
   </mat-toolbar-row>
   <mat-toolbar-row>
-    <span class="example-spacer"></span>
-    <button
-      mat-icon-button
-      class="example-icon"
-      aria-label="Example icon-button with menu icon"
-      (click)="goHome()"
-    >
-      Home
-    </button>
-    <span class="example-spacer"></span>
-    <button
-      mat-icon-button
-      class="example-icon"
-      aria-label="Example icon-button with menu icon"
-      (click)="goAllMovies()"
-    >
+    <span class="spacer"></span>
+    <button mat-icon-button class="icon" (click)="goHome()">Home</button>
+    <span class="spacer"></span>
+    <button mat-icon-button class="icon" (click)="goAllMovies()">
       All Movies
     </button>
-    <span class="example-spacer"></span>
-    <button
-      mat-icon-button
-      [matMenuTriggerFor]="menu"
-      class="example-icon"
-      aria-label="Example icon-button with menu icon"
-      (click)="goFavoriteMovies()"
-    >
+    <span class="spacer"></span>
+    <button mat-icon-button class="icon" (click)="goFavoriteMovies()">
       Favorite Movies
     </button>
-    <span class="example-spacer"></span>
-    <mat-icon
-      class="example-icon"
-      [matMenuTriggerFor]="menu"
-      aria-hidden="false"
-      aria-label="Example account_circle icon"
-      >account_circle</mat-icon
-    >
+    <span class="spacer"></span>
+    <mat-icon class="icon" [matMenuTriggerFor]="menu">account_circle</mat-icon>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="goAccountDetails()">
         <span>Account Details</span>

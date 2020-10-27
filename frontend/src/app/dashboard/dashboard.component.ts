@@ -8,15 +8,13 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['dashboard.component.css'],
 })
 export class DashboardComponent {
-  firstName = '';
-  lastName = '';
+  username = '';
   constructor(private userService: UserService) {
     this.userService
       .getUser()
       .pipe(first())
       .subscribe((user) => {
-        this.firstName = user.firstname;
-        this.lastName = user.lastname;
+        this.username = user.username;
       });
   }
 
