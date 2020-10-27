@@ -23,10 +23,7 @@ export class MovieDetailsComponent implements OnInit {
     console.log(this.id);
     this.moviesService.getDetails(this.id).subscribe((movie) => {
       this.movie = movie;
-      console.log(movie);
     });
-    console.log('wait');
     console.log(this.movie);
-    console.log('what');
   }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../_services';
 import { UserService } from '../_services';
-import { Location } from '@angular/common';
 import { User } from '../_models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -21,8 +20,7 @@ export class AccountDetailsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
-    private userService: UserService,
-    private location: Location
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -45,9 +43,6 @@ export class AccountDetailsComponent implements OnInit {
       console.log(user);
       this.user = user;
     });
-  }
-  goBack(): void {
-    this.location.back();
   }
 
   update() {

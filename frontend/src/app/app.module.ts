@@ -27,6 +27,8 @@ import { FavoriteMoviesComponent } from './movies/favorite-movies/favorite-movie
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { AccountDetailsComponent } from './account-details/account-details.component';
 import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
+import { MovieUpdateComponent } from './movies/movie-update/movie-update.component';
+import { BackButtonComponent } from './back-button/back-button.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { MovieDetailsComponent } from './movies/movie-details/movie-details.comp
     NavBarComponent,
     AccountDetailsComponent,
     MovieDetailsComponent,
+    MovieUpdateComponent,
+    BackButtonComponent,
   ],
   imports: [
     MatSliderModule,

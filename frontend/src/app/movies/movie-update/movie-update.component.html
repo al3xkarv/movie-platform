@@ -1,0 +1,45 @@
+<app-nav-bar></app-nav-bar>
+<mat-card class="card">
+  <mat-card-title>Edit Movie</mat-card-title>
+  <form [formGroup]="updateForm" (ngSubmit)="updateMovie()">
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label for="title">Title</mat-label>
+        <input
+          matInput
+          placeholder="Title"
+          type="text"
+          formControlName="title"
+          class="form-control"
+        />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field [formGroup]="updateForm">
+        <mat-label for="description">Description</mat-label>
+        <input
+          matInput
+          placeholder="Description"
+          [value]="movie.description"
+          type="text"
+          formControlName="description"
+          class="form-control"
+        />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field [formGroup]="updateForm">
+        <mat-label for="dateReleased">Date Released</mat-label>
+        <input
+          matInput
+          placeholder="Date released"
+          type="datetime-local"
+          formControlName="dateReleased"
+          class="form-control"
+        />
+      </mat-form-field>
+    </div>
+    <button mat-raised-button class="bt">Update</button>
+  </form>
+  <app-back-button></app-back-button>
+</mat-card>

@@ -20,13 +20,13 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(['/']);
   }
   goAllMovies() {
-    this.router.navigate(['../allmovies'], { relativeTo: this.route });
+    this.router.navigate(['/allmovies']);
   }
   goFavoriteMovies() {
-    this.router.navigate(['../favoritemovies'], { relativeTo: this.route });
+    this.router.navigate(['/favoritemovies']);
   }
   goAccountDetails() {
-    this.router.navigate(['../accountdetails'], { relativeTo: this.route });
+    this.router.navigate(['/accountdetails']);
   }
 
   logout() {

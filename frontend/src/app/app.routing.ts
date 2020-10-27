@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthGuard, LoggedGuard } from './_helpers';
 import { AccountDetailsComponent } from './account-details/account-details.component';
 import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
+import { MovieUpdateComponent } from './movies/movie-update/movie-update.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -34,6 +35,11 @@ const routes: Routes = [
   {
     path: 'details',
     component: MovieDetailsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'allmovies/update',
+    component: MovieUpdateComponent,
     canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: '' },
