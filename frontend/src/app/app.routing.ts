@@ -11,7 +11,7 @@ import { MovieUpdateComponent } from './movies/movie-update/movie-update.compone
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent, canActivate: [LoggedGuard] }, //canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [LoggedGuard] },
   {
     path: 'register',
     component: RegisterComponent,

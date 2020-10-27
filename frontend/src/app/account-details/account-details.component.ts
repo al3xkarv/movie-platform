@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../_services';
 import { UserService } from '../_services';
-import { User } from '../_models';
+import { Router } from '@angular/router';
+// import { User } from '../_models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { from, asapScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-account-details',
@@ -21,7 +21,8 @@ export class AccountDetailsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -31,30 +32,16 @@ export class AccountDetailsComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
-    // this.getUser();
-    // this.updateForm = this.formBuilder.group({
-    //   firstname: [this.user.firstname, Validators.required],
-    //   lastname: [this.user.lastname, Validators.required],
-    //   username: [this.user.username, Validators.required],
-    //   password: [this.user.password, Validators.required],
-    // });
+
     this.userService.getUser().subscribe((user) => {
       this.user = user;
       this.updateForm.patchValue(user);
     });
-
-    // source.toPromise().then(x => console.log('toPromise', x));
   }
 
-  // get firstname(){}
   get f() {
     return this.updateForm.controls;
   }
-
-  // get firstname(){
-
-  // }
-  // getUser() {}
 
   update() {
     let dirtyValues = {};
@@ -67,14 +54,14 @@ export class AccountDetailsComponent implements OnInit {
       } else {
       }
     });
-    console.log(dirtyValues);
 
     this.authenticationService
       .updateUser(dirtyValues)
       .pipe()
       .subscribe({
-        next: () => {},
+        next: () => {
+          this.router.navigate(['/register']);
+        },
       });
-    // this.getUser();
   }
 }

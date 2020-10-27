@@ -11,8 +11,7 @@ import { AuthenticationService } from '../_services/authentication.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  loading = false;
-  submitted = false;
+
   isChecked = true;
   keepLogged = true;
   returnUrl: string;
@@ -38,10 +37,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('testing login forms');
-    // this.submitted = true;
-
-    console.log(this.keepLogged);
     this.authenticationService
       .login(this.f.username.value, this.f.password.value, this.keepLogged)
       .pipe(first())
@@ -51,15 +46,10 @@ export class LoginComponent implements OnInit {
         },
         (error) => {
           this.error = error;
-          console.log(error);
-          this.loading = false;
         }
       );
-    console.log(this.loginForm.hasError('required'));
-    this.f.username.reset();
-    this.f.password.reset();
   }
   goRegister() {
-    this.router.navigate(['../register'], { relativeTo: this.route });
+    this.router.navigate(['/register']);
   }
 }

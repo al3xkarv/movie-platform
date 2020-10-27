@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { environment } from '../../environments/environment';
-import { User } from '../_models/user';
+// import { User } from '../_models/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -35,7 +35,6 @@ export class AuthenticationService {
             sessionStorage.setItem('currentUser', JSON.stringify(user));
             this.currentUserSubject.next(user);
             return user;
-            // return;
           } else {
             localStorage.setItem('currentUser', JSON.stringify(user));
             this.currentUserSubject.next(user);
@@ -46,33 +45,24 @@ export class AuthenticationService {
   }
 
   register(user) {
-    return this.http
-      .post<any>(`${environment.apiUrl}/users`, user)
-
-      .pipe(
-        map((user) => {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          // localStorage.setItem('currentUser', JSON.stringify(user));
-          // this.currentUserSubject.next(user);
-          return user;
-        })
-      );
+    return this.http.post<any>(`${environment.apiUrl}/users`, user).pipe(
+      map((user) => {
+        return user;
+      })
+    );
   }
 
-  //TODO update localStorage
   updateUser(valueschanged) {
     return this.http
       .put<any>(`${environment.apiUrl}/users/`, valueschanged)
       .pipe(
         map((user) => {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
           return user;
         })
       );
   }
 
   logout() {
-    // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     sessionStorage.removeItem('currentUser');
 

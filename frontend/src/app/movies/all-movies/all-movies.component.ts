@@ -114,7 +114,6 @@ export class AllMoviesComponent implements OnInit {
         complete: () => {
           this.getFavoriteMovies();
           this.favoriteArray[i] = !this.favoriteArray[i];
-          console.log('done');
         },
       });
     } else {

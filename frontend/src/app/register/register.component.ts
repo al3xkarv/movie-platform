@@ -36,7 +36,6 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.controls;
   }
 
-  //TODO add error manipulation + if status is ok also login
   onSubmit() {
     const user = this.registerForm.value;
     delete user.rePassword;
@@ -48,7 +47,6 @@ export class RegisterComponent implements OnInit {
           this.authenticationService
             .login(this.f.username.value, this.f.password.value, false)
             .subscribe({ next: () => this.router.navigate(['/']) });
-          //also login logic goes here
         },
         error: (err) => {
           this.err = err;
