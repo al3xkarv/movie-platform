@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../_services';
 import { UserService } from '../_services';
 import { Router } from '@angular/router';
-// import { User } from '../_models';
+import { User } from '../_models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -11,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./account-details.component.css'],
 })
 export class AccountDetailsComponent implements OnInit {
-  user;
+  user: User;
   firstname: string;
   lastname: string;
   username: string;
@@ -20,7 +19,6 @@ export class AccountDetailsComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService,
     private userService: UserService,
     private router: Router
   ) {}
@@ -55,12 +53,15 @@ export class AccountDetailsComponent implements OnInit {
       }
     });
 
-    this.authenticationService
+    this.userService
       .updateUser(dirtyValues)
       .pipe()
       .subscribe({
         next: () => {
           this.router.navigate(['/register']);
+        },
+        error: (err) => {
+          console.error('something wrong occurred: ' + err);
         },
       });
   }

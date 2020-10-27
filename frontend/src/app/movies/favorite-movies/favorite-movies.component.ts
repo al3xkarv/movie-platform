@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatAccordion } from '@angular/material/expansion';
-import { Movie } from '../../_models/movie';
 import { FavoriteMovie } from '../../_models/favoritemovie';
 import { MoviesService } from '../../_services/movies.service';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -11,10 +9,6 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./favorite-movies.component.css'],
 })
 export class FavoriteMoviesComponent implements OnInit {
-  @ViewChild(MatAccordion) accordion: MatAccordion;
-
-  panelOpenState = false;
-
   favoriteMovies: FavoriteMovie[];
   searchForm = new FormGroup({
     search: new FormControl('', []),
@@ -35,19 +29,26 @@ export class FavoriteMoviesComponent implements OnInit {
   }
 
   searchMovies(title) {
-    this.moviesService
-      .getFavoriteMovies(title)
-      .subscribe((movies) => (this.favoriteMovies = movies));
+    this.moviesService.getFavoriteMovies(title).subscribe({
+      next: (movies) => {
+        this.favoriteMovies = movies;
+      },
+      error: (err) => {
+        console.error('something wrong occurred: ' + err);
+      },
+    });
   }
 
   deleteFavoriteMovie(id: string) {
-    this.moviesService
-      .deleteFavoriteMovie(id)
-      .subscribe(
-        (deletedMovie) =>
-          (this.favoriteMovies = this.favoriteMovies.filter(
-            (movie) => deletedMovie.id !== movie.favoriteId
-          ))
-      );
+    this.moviesService.deleteFavoriteMovie(id).subscribe({
+      next: (deletedMovie) => {
+        this.favoriteMovies = this.favoriteMovies.filter(
+          (movie) => deletedMovie.id !== movie.favoriteId
+        );
+      },
+      error: (err) => {
+        console.error('something wrong occurred: ' + err);
+      },
+    });
   }
 }

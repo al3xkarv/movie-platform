@@ -13,8 +13,13 @@ export class DashboardComponent {
     this.userService
       .getUser()
       .pipe(first())
-      .subscribe((user) => {
-        this.username = user.username;
+      .subscribe({
+        next: (user) => {
+          this.username = user.username;
+        },
+        error: (err) => {
+          console.error('something wrong occurred: ' + err);
+        },
       });
   }
 

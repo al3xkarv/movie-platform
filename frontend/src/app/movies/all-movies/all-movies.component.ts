@@ -1,12 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatAccordion } from '@angular/material/expansion';
+import { Component, OnInit } from '@angular/core';
 import { Movie } from '../../_models/Movie';
 import { FavoriteMovie } from '../../_models/favoritemovie';
 import {
   FormBuilder,
   FormGroup,
   Validators,
-  FormArray,
   FormControl,
 } from '@angular/forms';
 
@@ -18,8 +16,6 @@ import { MoviesService } from '../../_services/movies.service';
   styleUrls: ['./all-movies.component.css'],
 })
 export class AllMoviesComponent implements OnInit {
-  submitted = false;
-  panelOpenState = false;
   movies: Movie[];
   favoriteMovies: FavoriteMovie[];
   favoriteArray: boolean[] = [];
@@ -84,9 +80,7 @@ export class AllMoviesComponent implements OnInit {
         next: () => {},
         error: (err) => console.error('something wrong occurred: ' + err),
       });
-    // next: () => {
-    //   // this.router.navigate(['../dashboard'], { relativeTo: this.route });
-    // },
+
     this.getMovies();
     this.favoriteArray.push(false);
   }
@@ -100,9 +94,15 @@ export class AllMoviesComponent implements OnInit {
   }
 
   searchMovies(title) {
-    this.moviesService
-      .getMovies(title)
-      .subscribe((movies) => (this.movies = movies));
+    this.moviesService.getMovies(title).subscribe({
+      next: (movies) => {
+        this.movies = movies;
+      },
+      error: (err) => {
+        console.error('something wrong occurred: ' + err);
+      },
+    });
+
     this.getFavoriteMovies();
   }
 
@@ -123,7 +123,6 @@ export class AllMoviesComponent implements OnInit {
       this.moviesService
         .deleteFavoriteMovie(favoriteMoviesTemp[0].favoriteId)
         .subscribe({
-          next: () => {},
           error: (err) => {
             console.error('something wrong occurred: ' + err);
           },

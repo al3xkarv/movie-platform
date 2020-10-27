@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { environment } from '../../environments/environment';
-// import { User } from '../_models/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -50,16 +49,6 @@ export class AuthenticationService {
         return user;
       })
     );
-  }
-
-  updateUser(valueschanged) {
-    return this.http
-      .put<any>(`${environment.apiUrl}/users/`, valueschanged)
-      .pipe(
-        map((user) => {
-          return user;
-        })
-      );
   }
 
   logout() {

@@ -1,10 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { MoviesService } from '../../_services/movies.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatAccordion } from '@angular/material/expansion';
+import { Component, OnInit } from '@angular/core';
 import { Movie } from '../../_models/Movie';
-import { FavoriteMovie } from '../../_models/favoritemovie';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -16,9 +13,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class MovieUpdateComponent implements OnInit {
   id: string;
   movie: Movie;
-
-  submitted = false;
-  panelOpenState = false;
 
   updateForm: FormGroup;
   constructor(
@@ -35,9 +29,14 @@ export class MovieUpdateComponent implements OnInit {
       description: ['', Validators.required],
       dateReleased: ['', Validators.required],
     });
-    this.moviesService.getDetails(this.id).subscribe((movie) => {
-      this.movie = movie;
-      this.updateForm.patchValue(movie);
+    this.moviesService.getDetails(this.id).subscribe({
+      next: (movie) => {
+        this.movie = movie;
+        this.updateForm.patchValue(movie);
+      },
+      error: (err) => {
+        console.error('something wrong occurred: ' + err);
+      },
     });
   }
   get f() {

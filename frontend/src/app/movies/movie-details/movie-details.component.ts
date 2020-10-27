@@ -18,8 +18,13 @@ export class MovieDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.queryParamMap.get('id');
-    this.moviesService.getDetails(this.id).subscribe((movie) => {
-      this.movie = movie;
+    this.moviesService.getDetails(this.id).subscribe({
+      next: (movie) => {
+        this.movie = movie;
+      },
+      error: (err) => {
+        console.error('something wrong occurred: ' + err);
+      },
     });
   }
 }

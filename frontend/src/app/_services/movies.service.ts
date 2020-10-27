@@ -1,12 +1,8 @@
-import { Movie } from '../_models/movie';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-// import { Router } from '@angular/router';
 
 import { environment } from '../../environments/environment';
-import { User } from '../_models/user';
 @Injectable({
   providedIn: 'root',
 })
@@ -29,7 +25,7 @@ export class MoviesService {
       movieId: id,
     });
   }
-  //TODO use Movie interface
+
   addMovie(title: string, description: string, dateReleased: string) {
     return this.http
       .post<any>(`${environment.apiUrl}/movies`, {
