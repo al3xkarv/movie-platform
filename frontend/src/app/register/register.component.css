@@ -6,6 +6,9 @@
   padding: 20px;
 }
 
+.error {
+  color: red;
+}
 .register-bt {
   margin: 10px;
 }

@@ -40,9 +40,6 @@ export class MoviesService {
       })
       .pipe(
         map((movie) => {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          // localStorage.setItem('currentUser', JSON.stringify(user));
-          // this.currentUserSubject.next(user);
           return movie;
         })
       );
@@ -53,7 +50,6 @@ export class MoviesService {
       .put<any>(`${environment.apiUrl}/movies/${id}`, movieUpdate)
       .pipe(
         map((updatedMovie) => {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
           return updatedMovie;
         })
       );

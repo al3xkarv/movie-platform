@@ -1,6 +1,6 @@
-.heart-icon-red {
-  color: red;
-}
+/* .heart-icon-red {
+  color: black;
+} */
 
 .edit-icon-red {
   color: blue;
@@ -10,15 +10,6 @@
   display: flex;
   flex-wrap: wrap;
   /* size: 20px; */
-}
-
-.example-headers-align .mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
-}
-
-.example-headers-align .mat-form-field + .mat-form-field {
-  margin-left: 8px;
 }
 
 .title:hover {
@@ -33,7 +24,21 @@
   margin-right: 30%;
   margin-left: 20%;
 }
+/* .heart-icon-red:checked {
+  color: black;
+} */
 
+/* .mat-button-toggle {
+  color: black;
+} */
+mat-button-toggle {
+  color: red;
+}
+/* mat-button-toggle:checked mat-icon {
+  color: red;
+  text-decoration-color: red;
+  /* background-color: darkred; */
+/* }  */
 * {
   border: 0;
   box-sizing: border-box;

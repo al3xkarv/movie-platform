@@ -11,7 +11,7 @@ import { ConfirmPasswordValidator } from '../_helpers/reenter-validator';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-
+  err: string = '';
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -44,14 +44,19 @@ export class RegisterComponent implements OnInit {
       .register(user)
       .pipe(first())
       .subscribe({
-        next: (res) => {
-          console.log(res);
+        next: () => {
+          this.authenticationService
+            .login(this.f.username.value, this.f.password.value, false)
+            .subscribe({ next: () => this.router.navigate(['/']) });
           //also login logic goes here
+        },
+        error: (err) => {
+          this.err = err;
         },
       });
   }
 
   goLogin() {
-    this.router.navigate(['../login'], { relativeTo: this.route });
+    this.router.navigate(['/login']);
   }
 }

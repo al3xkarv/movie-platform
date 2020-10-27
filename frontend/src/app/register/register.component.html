@@ -121,6 +121,7 @@
             >
           </mat-error>
         </mat-form-field>
+        <div class="error" *ngIf="err != ''">{{ err }}</div>
       </div>
       <button
         mat-raised-button

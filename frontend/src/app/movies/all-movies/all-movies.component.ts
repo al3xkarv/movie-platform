@@ -18,14 +18,11 @@ import { MoviesService } from '../../_services/movies.service';
   styleUrls: ['./all-movies.component.css'],
 })
 export class AllMoviesComponent implements OnInit {
-  @ViewChild(MatAccordion) accordion: MatAccordion;
-
   submitted = false;
   panelOpenState = false;
   movies: Movie[];
   favoriteMovies: FavoriteMovie[];
-  favoriteMoviesTemp: FavoriteMovie[];
-
+  favoriteArray: boolean[] = [];
   addForm: FormGroup;
   searchForm = new FormGroup({
     search: new FormControl('', []),
@@ -51,16 +48,29 @@ export class AllMoviesComponent implements OnInit {
   }
 
   getMovies(): void {
-    this.moviesService
-      .getMovies('')
-      .subscribe((movies) => (this.movies = movies));
+    this.moviesService.getMovies('').subscribe((movies) => {
+      this.movies = movies;
+      if (this.favoriteArray.length === 0) {
+        for (let i = 0; i < movies.length; i++) {
+          this.favoriteArray.push(false);
+        }
+      }
+    });
+
     this.getFavoriteMovies();
   }
 
   getFavoriteMovies() {
-    this.moviesService
-      .getFavoriteMovies('')
-      .subscribe((movies) => (this.favoriteMovies = movies));
+    this.moviesService.getFavoriteMovies('').subscribe((movies) => {
+      this.favoriteMovies = movies;
+      let i = this.movies.findIndex((movie) => movie.title == movies.title);
+      for (let mov of movies) {
+        let i = this.movies.findIndex((movie) => movie.title == mov.title);
+        if (i != -1) {
+          this.favoriteArray[i] = true;
+        }
+      }
+    });
   }
 
   addMovie() {
@@ -70,19 +80,22 @@ export class AllMoviesComponent implements OnInit {
         this.a.description.value,
         this.a.dateReleased.value
       )
-      .subscribe();
+      .subscribe({
+        next: () => {},
+        error: (err) => console.error('something wrong occurred: ' + err),
+      });
     // next: () => {
     //   // this.router.navigate(['../dashboard'], { relativeTo: this.route });
     // },
     this.getMovies();
+    this.favoriteArray.push(false);
   }
 
-  deleteMovie(id: string) {
+  deleteMovie(id: string, i: number) {
     this.moviesService.deleteMovie(id).subscribe((deletedMovie) => {
-      // this.favoriteMovies = this.favoriteMovies.filter(
-      //   (movie) => deletedMovie.id !== movie.favoriteId);
       this.movies = this.movies.filter((movie) => deletedMovie.id !== movie.id);
     });
+    this.favoriteArray.splice(i, 1);
     this.getMovies();
   }
 
@@ -93,28 +106,35 @@ export class AllMoviesComponent implements OnInit {
     this.getFavoriteMovies();
   }
 
-  favorite(id: string) {
-    this.moviesService.favoriteMovie(id).subscribe();
-    // (favoriteId) => this.array.push(favoriteId)
-    // ();
-    this.getFavoriteMovies();
-    // console.log(this.array);
-  }
-
-  unfavorite(id: string) {
-    // const tempMovie: FavoriteMovie= {};
-    this.favoriteMoviesTemp = this.favoriteMovies.filter(
-      (movie) => movie.id == id
-    );
-    this.moviesService
-      .deleteFavoriteMovie(this.favoriteMoviesTemp[0].favoriteId)
-      .subscribe();
-    // (deletedMovie) =>
-    //   (this.favoriteMovies = this.favoriteMovies.filter(
-    //     (movie) => deletedMovie.id !== movie.favoriteId
-    //   ))
-    // ();
-    this.getFavoriteMovies();
+  favorite_unfavorite(id: string, i: number) {
+    if (this.favoriteArray[i] == false) {
+      this.moviesService.favoriteMovie(id).subscribe({
+        next: () => {},
+        error: (err) => console.error('something wrong occurred: ' + err),
+        complete: () => {
+          this.getFavoriteMovies();
+          this.favoriteArray[i] = !this.favoriteArray[i];
+          console.log('done');
+        },
+      });
+    } else {
+      const favoriteMoviesTemp: FavoriteMovie[] = this.favoriteMovies.filter(
+        (movie) => movie.id == id
+      );
+      this.moviesService
+        .deleteFavoriteMovie(favoriteMoviesTemp[0].favoriteId)
+        .subscribe({
+          next: () => {},
+          error: (err) => {
+            console.error('something wrong occurred: ' + err);
+          },
+          complete: () => {
+            this.getFavoriteMovies();
+            this.favoriteArray[i] = !this.favoriteArray[i];
+          },
+        });
+    }
+    this.getMovies();
   }
 
   get f() {

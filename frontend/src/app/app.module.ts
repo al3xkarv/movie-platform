@@ -10,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -56,6 +58,8 @@ import { BackButtonComponent } from './back-button/back-button.component';
     MatMenuModule,
     MatExpansionModule,
     MatListModule,
+    MatCheckboxModule,
+    MatButtonToggleModule,
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,

@@ -17,21 +17,6 @@
   </button>
 </form>
 
-<!-- <mat-list>
-   <mat-list-item *ngFor="let folder of folders">
-    <mat-icon mat-list-icon>folder</mat-icon>
-    <div mat-line>{{folder.name}}</div>
-    <div mat-line> {{folder.updated | date}} </div>
-  </mat-list-item>
-  <mat-divider></mat-divider>
-  <div mat-subheader>Notes</div>
-  <mat-list-item *ngFor="let note of notes">
-    <mat-icon mat-list-icon>note</mat-icon>
-    <div mat-line>{{note.name}}</div>
-    <div mat-line> {{note.updated | date}} </div>
-  </mat-list-item>
-</mat-list> -->
-
 <mat-list class="list">
   <mat-list-item *ngFor="let movie of movies; index as i">
     <mat-icon mat-list-icon>movie</mat-icon>
@@ -52,22 +37,27 @@
       <mat-icon>edit</mat-icon>
     </button>
 
-    <button
+    <!-- <mat-checkbox
       mat-icon-button
+      [checked]="favoriteArray[i]"
       class="heart-icon-red"
       aria-label="Example icon-button with menu icon"
-      (click)="favorite(movie.id)"
     >
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      class="heart-icon-black"
-      aria-label="Example icon-button with menu icon"
-      (click)="unfavorite(movie.id)"
-    >
-      <mat-icon>favorite</mat-icon>
-    </button>
+      <mat-icon
+        class="heart-icon-red"
+        (click)="favorite_unfavorite(movie.id, i)"
+        >favorite</mat-icon
+      >
+    </mat-checkbox> -->
+
+    <mat-button-toggle [checked]="favoriteArray[i]" value="bold">
+      <mat-icon
+        class="heart-icon-red"
+        (click)="favorite_unfavorite(movie.id, i)"
+        >favorite</mat-icon
+      >
+    </mat-button-toggle>
+
     <button
       mat-icon-button
       aria-label="Example icon-button with menu icon"
