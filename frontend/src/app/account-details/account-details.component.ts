@@ -3,6 +3,7 @@ import { AuthenticationService } from '../_services';
 import { UserService } from '../_services';
 import { User } from '../_models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { from, asapScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-account-details',
@@ -24,26 +25,36 @@ export class AccountDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getUser();
-
     this.updateForm = this.formBuilder.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+    // this.getUser();
+    // this.updateForm = this.formBuilder.group({
+    //   firstname: [this.user.firstname, Validators.required],
+    //   lastname: [this.user.lastname, Validators.required],
+    //   username: [this.user.username, Validators.required],
+    //   password: [this.user.password, Validators.required],
+    // });
+    this.userService.getUser().subscribe((user) => {
+      this.user = user;
+      this.updateForm.patchValue(user);
+    });
+
+    // source.toPromise().then(x => console.log('toPromise', x));
   }
 
+  // get firstname(){}
   get f() {
     return this.updateForm.controls;
   }
 
-  getUser() {
-    this.userService.getUser().subscribe((user) => {
-      console.log(user);
-      this.user = user;
-    });
-  }
+  // get firstname(){
+
+  // }
+  // getUser() {}
 
   update() {
     let dirtyValues = {};
@@ -64,6 +75,6 @@ export class AccountDetailsComponent implements OnInit {
       .subscribe({
         next: () => {},
       });
-    this.getUser();
+    // this.getUser();
   }
 }

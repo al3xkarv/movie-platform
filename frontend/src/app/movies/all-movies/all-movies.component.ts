@@ -25,9 +25,11 @@ export class AllMoviesComponent implements OnInit {
   movies: Movie[];
   favoriteMovies: FavoriteMovie[];
   favoriteMoviesTemp: FavoriteMovie[];
-  searchForm: FormGroup;
+
   addForm: FormGroup;
-  updateForm: FormGroup;
+  searchForm = new FormGroup({
+    search: new FormControl('', []),
+  });
 
   constructor(
     private moviesService: MoviesService,
@@ -39,12 +41,6 @@ export class AllMoviesComponent implements OnInit {
 
     this.searchForm = this.formBuilder.group({
       search: ['', Validators.required],
-    });
-
-    this.updateForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      dateReleased: ['', Validators.required],
     });
 
     this.addForm = this.formBuilder.group({
@@ -78,47 +74,6 @@ export class AllMoviesComponent implements OnInit {
     // next: () => {
     //   // this.router.navigate(['../dashboard'], { relativeTo: this.route });
     // },
-    this.getMovies();
-  }
-
-  updateMovie(
-    title: string,
-    description: string,
-    dateReleased: string,
-    id: string
-  ) {
-    let dirtyValues = {};
-
-    Object.keys(this.updateForm.controls).forEach((key) => {
-      let currentControl = this.updateForm.controls[key];
-
-      if (currentControl.dirty) {
-        // if (currentControl.controls)
-        //     dirtyValues[key] = this.getDirtyValues(currentControl);
-        // else
-        dirtyValues[key] = currentControl.value;
-      }
-    });
-    for (const key in dirtyValues) {
-      console.log(key);
-      console.log(dirtyValues[key]);
-      if (dirtyValues.hasOwnProperty('title')) {
-        if (dirtyValues[key] == title) {
-          // deleteFromObject('checkbox_description', myObject);
-          delete dirtyValues[key];
-        }
-        // your logic here
-      }
-    }
-    // const ddirtyValues = filter(dirtyValues, ) filter(dirtyValues, (_, fruit) => fruit.title==title);
-    console.log(dirtyValues);
-
-    this.moviesService.updateMovie(dirtyValues, id).subscribe();
-    // next: () => {
-    //   // this.router.navigate(['../dashboard'], { relativeTo: this.route });
-    // },
-    this.updateForm.reset();
-
     this.getMovies();
   }
 
@@ -164,10 +119,6 @@ export class AllMoviesComponent implements OnInit {
 
   get f() {
     return this.searchForm.controls;
-  }
-
-  get u() {
-    return this.updateForm.controls;
   }
 
   get a() {

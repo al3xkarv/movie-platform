@@ -3,6 +3,7 @@ import { MatAccordion } from '@angular/material/expansion';
 import { Movie } from '../../_models/movie';
 import { FavoriteMovie } from '../../_models/favoritemovie';
 import { MoviesService } from '../../_services/movies.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-favorite-movies',
@@ -18,6 +19,9 @@ export class FavoriteMoviesComponent implements OnInit {
   // dateReleased: string;
   // movies: Movie[];
   favoriteMovies: FavoriteMovie[];
+  searchForm = new FormGroup({
+    search: new FormControl('', []),
+  });
 
   constructor(private moviesService: MoviesService) {}
 

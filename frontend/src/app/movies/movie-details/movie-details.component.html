@@ -1,6 +1,6 @@
 <app-nav-bar></app-nav-bar>
 <p>Movie Details:</p>
-<div>
+<div *ngIf="movie">
   Title: {{ movie.title }} <br />
   Description: {{ movie.description }} <br />
   DateReleased: {{ movie.dateReleased }} <br />

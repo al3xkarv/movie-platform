@@ -41,16 +41,16 @@ export class MovieUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.queryParamMap.get('id');
+    this.updateForm = this.formBuilder.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      dateReleased: ['', Validators.required],
+    });
     console.log(this.id);
     this.moviesService.getDetails(this.id).subscribe((movie) => {
       this.movie = movie;
-      this.updateForm = this.formBuilder.group({
-        title: [this.movie.title, Validators.required],
-        description: [this.movie.description, Validators.required],
-        dateReleased: [this.movie.dateReleased, Validators.required],
-      });
+      this.updateForm.patchValue(movie);
     });
-    console.log(this.movie);
   }
   get f() {
     return this.updateForm.controls;
