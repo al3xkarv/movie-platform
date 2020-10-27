@@ -21,6 +21,19 @@
   margin-left: 8px;
 }
 
+.title:hover {
+  cursor: pointer;
+}
+
+.list {
+  margin-right: 30%;
+  margin-left: 20%;
+}
+.add-movie {
+  margin-right: 30%;
+  margin-left: 20%;
+}
+
 * {
   border: 0;
   box-sizing: border-box;

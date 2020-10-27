@@ -14,16 +14,12 @@ export class MovieDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private moviesService: MoviesService
-  ) {
-    // this.param2 = params['param2'];
-  }
+  ) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.queryParamMap.get('id');
-    console.log(this.id);
     this.moviesService.getDetails(this.id).subscribe((movie) => {
       this.movie = movie;
     });
-    // console.log(this.movie);
   }
 }

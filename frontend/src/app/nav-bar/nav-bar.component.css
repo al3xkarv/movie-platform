@@ -5,3 +5,7 @@
 .icon:hover {
   cursor: pointer;
 }
+
+.app-title {
+  cursor: pointer;
+}

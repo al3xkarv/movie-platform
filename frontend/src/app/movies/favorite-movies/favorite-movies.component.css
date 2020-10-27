@@ -3,16 +3,17 @@
   flex-wrap: wrap;
   /* size: 20px; */
 }
-
-.example-headers-align .mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
+.list {
+  margin-right: 30%;
+  margin-left: 20%;
+}
+.title:hover {
+  cursor: pointer;
 }
 
-.example-headers-align .mat-form-field + .mat-form-field {
-  margin-left: 8px;
+.remove-icon {
+  color: red;
 }
-
 * {
   border: 0;
   box-sizing: border-box;

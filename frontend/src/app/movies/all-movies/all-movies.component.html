@@ -17,12 +17,32 @@
   </button>
 </form>
 
-<div class="grid grid-pad">
-  <div *ngFor="let movie of movies; index as i">
-    <mat-icon>movie</mat-icon>
-    <a routerLink="../details" [queryParams]="{ id: movie.id }">{{
-      movie.title
-    }}</a>
+<!-- <mat-list>
+   <mat-list-item *ngFor="let folder of folders">
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <div mat-line>{{folder.name}}</div>
+    <div mat-line> {{folder.updated | date}} </div>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <div mat-subheader>Notes</div>
+  <mat-list-item *ngFor="let note of notes">
+    <mat-icon mat-list-icon>note</mat-icon>
+    <div mat-line>{{note.name}}</div>
+    <div mat-line> {{note.updated | date}} </div>
+  </mat-list-item>
+</mat-list> -->
+
+<mat-list class="list">
+  <mat-list-item *ngFor="let movie of movies; index as i">
+    <mat-icon mat-list-icon>movie</mat-icon>
+    <div
+      mat-line
+      class="title"
+      routerLink="../details"
+      [queryParams]="{ id: movie.id }"
+    >
+      {{ movie.title }}
+    </div>
     <button
       mat-icon-button
       class="edit"
@@ -55,8 +75,8 @@
     >
       <mat-icon>delete</mat-icon>
     </button>
-  </div>
-</div>
+  </mat-list-item>
+</mat-list>
 
 <div class="add-movie">
   <mat-expansion-panel hideToggle class="panel-header">

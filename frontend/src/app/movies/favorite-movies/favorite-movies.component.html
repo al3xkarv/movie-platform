@@ -15,17 +15,25 @@
     <span>Search</span>
   </button>
 </form>
-<div *ngFor="let movie of favoriteMovies">
-  <a class="col-1-4" routerLink="../details" [queryParams]="{ id: movie.id }">
-    <mat-icon>movie</mat-icon>
-    <span>{{ movie.title }}</span>
-  </a>
-  <button
-    mat-icon-button
-    class="example-icon"
-    aria-label="Example icon-button with menu icon"
-    (click)="deleteFavoriteMovie(movie.favoriteId)"
-  >
-    <mat-icon>delete</mat-icon>
-  </button>
-</div>
+
+<mat-list class="list">
+  <mat-list-item *ngFor="let movie of favoriteMovies">
+    <mat-icon mat-list-icon>movie</mat-icon>
+    <div
+      mat-line
+      class="title"
+      routerLink="../details"
+      [queryParams]="{ id: movie.id }"
+    >
+      <span>{{ movie.title }}</span>
+    </div>
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+      (click)="deleteFavoriteMovie(movie.favoriteId)"
+    >
+      <mat-icon class="remove-icon">remove_circle_outline</mat-icon>
+    </button>
+  </mat-list-item>
+</mat-list>

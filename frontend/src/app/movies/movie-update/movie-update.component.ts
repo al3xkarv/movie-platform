@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { MoviesService } from '../../_services/movies.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -34,7 +34,8 @@ export class MovieUpdateComponent implements OnInit {
   constructor(
     private moviesService: MoviesService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     // this.param2 = params['param2'];
   }
@@ -46,7 +47,6 @@ export class MovieUpdateComponent implements OnInit {
       description: ['', Validators.required],
       dateReleased: ['', Validators.required],
     });
-    console.log(this.id);
     this.moviesService.getDetails(this.id).subscribe((movie) => {
       this.movie = movie;
       this.updateForm.patchValue(movie);
@@ -86,8 +86,8 @@ export class MovieUpdateComponent implements OnInit {
 
     this.moviesService.updateMovie(dirtyValues, this.id).subscribe();
     // next: () => {
-    //   // this.router.navigate(['../dashboard'], { relativeTo: this.route });
     // },
     // this.updateForm.reset();
+    this.router.navigate(['/allmovies']);
   }
 }

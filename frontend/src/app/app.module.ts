@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -54,6 +55,7 @@ import { BackButtonComponent } from './back-button/back-button.component';
     MatIconModule,
     MatMenuModule,
     MatExpansionModule,
+    MatListModule,
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,

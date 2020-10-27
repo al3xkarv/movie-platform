@@ -1,9 +1,16 @@
 <app-nav-bar></app-nav-bar>
-<p>Movie Details:</p>
-<div *ngIf="movie">
-  Title: {{ movie.title }} <br />
-  Description: {{ movie.description }} <br />
-  DateReleased: {{ movie.dateReleased }} <br />
-</div>
-
-<app-back-button></app-back-button>
+<mat-list class="list">
+  <div mat-subheader>Movie details:</div>
+  <div *ngIf="movie">
+    <mat-list-item> <b>Title: &nbsp;</b> {{ movie.title }} </mat-list-item>
+    <mat-list-item
+      ><b>Description: &nbsp;</b> {{ movie.description }}
+    </mat-list-item>
+    <mat-list-item
+      ><b> DateReleased:&nbsp;</b> {{ movie.dateReleased }}
+    </mat-list-item>
+  </div>
+  <mat-list-item>
+    <app-back-button></app-back-button>
+  </mat-list-item>
+</mat-list>
