@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService
   ) {}
@@ -31,7 +30,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // convenience getter for easy access to form fields
   get f() {
     return this.loginForm.controls;
   }

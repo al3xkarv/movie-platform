@@ -18,12 +18,15 @@ export class NavBarComponent implements OnInit {
   goHome() {
     this.router.navigate(['/']);
   }
+
   goAllMovies() {
     this.router.navigate(['/allmovies']);
   }
+
   goFavoriteMovies() {
     this.router.navigate(['/favoritemovies']);
   }
+
   goAccountDetails() {
     this.router.navigate(['/accountdetails']);
   }

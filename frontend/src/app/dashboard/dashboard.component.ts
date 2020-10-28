@@ -8,7 +8,7 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['dashboard.component.css'],
 })
 export class DashboardComponent {
-  username = '';
+  username: string = '';
   constructor(private userService: UserService) {
     this.userService
       .getUser()

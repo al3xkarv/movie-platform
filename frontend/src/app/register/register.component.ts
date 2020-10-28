@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../_services/authentication.service';
 import { first } from 'rxjs/operators';
 import { ConfirmPasswordValidator } from '../_helpers/reenter-validator';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',

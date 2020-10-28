@@ -47,9 +47,7 @@ export class AllMoviesComponent implements OnInit {
     this.moviesService.getMovies('').subscribe((movies) => {
       this.movies = movies;
       if (this.favoriteArray.length === 0) {
-        for (let i = 0; i < movies.length; i++) {
-          this.favoriteArray.push(false);
-        }
+        this.favoriteArray = movies.map(() => false);
       }
     });
 
@@ -57,11 +55,12 @@ export class AllMoviesComponent implements OnInit {
   }
 
   getFavoriteMovies() {
-    this.moviesService.getFavoriteMovies('').subscribe((movies) => {
-      this.favoriteMovies = movies;
-      let i = this.movies.findIndex((movie) => movie.title == movies.title);
-      for (let mov of movies) {
-        let i = this.movies.findIndex((movie) => movie.title == mov.title);
+    this.moviesService.getFavoriteMovies('').subscribe((favMovies) => {
+      this.favoriteMovies = favMovies;
+      for (let favMovie of favMovies) {
+        const i = this.movies.findIndex(
+          (movie) => movie.title == favMovie.title
+        );
         if (i != -1) {
           this.favoriteArray[i] = true;
         }
@@ -85,12 +84,15 @@ export class AllMoviesComponent implements OnInit {
     this.favoriteArray.push(false);
   }
 
-  deleteMovie(id: string, i: number) {
-    this.moviesService.deleteMovie(id).subscribe((deletedMovie) => {
-      this.movies = this.movies.filter((movie) => deletedMovie.id !== movie.id);
+  deleteMovie(id: string) {
+    this.moviesService.deleteMovie(id).subscribe({
+      next: (deletedMovie) => {
+        const i = this.movies.findIndex((movie) => movie.id == deletedMovie.id);
+        this.favoriteArray.splice(i, 1);
+        this.movies.splice(i, 1);
+      },
+      complete: () => this.getMovies(),
     });
-    this.favoriteArray.splice(i, 1);
-    this.getMovies();
   }
 
   searchMovies(title) {

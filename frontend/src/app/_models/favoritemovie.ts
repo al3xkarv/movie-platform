@@ -1,4 +1,4 @@
-export class FavoriteMovie {
+export interface FavoriteMovie {
   id: string;
   title: string;
   description: string;

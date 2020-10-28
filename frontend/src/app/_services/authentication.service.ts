@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { environment } from '../../environments/environment';
+import { User } from '../_models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -22,33 +23,28 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
+  //TO DO ADD RETURN TYPES
+
   login(username: string, password: string, keepLogged: boolean) {
     return this.http
-      .post<any>(`${environment.apiUrl}/users/signin`, {
+      .post<{ user: User; jwt: string }>(`${environment.apiUrl}/users/signin`, {
         username: username,
         password: password,
       })
       .pipe(
         map((user) => {
-          if (!keepLogged) {
-            sessionStorage.setItem('currentUser', JSON.stringify(user));
-            this.currentUserSubject.next(user);
-            return user;
-          } else {
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            this.currentUserSubject.next(user);
-            return user;
-          }
+          const storage = keepLogged ? localStorage : sessionStorage;
+          storage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(user);
+          return user;
         })
       );
   }
 
   register(user) {
-    return this.http.post<any>(`${environment.apiUrl}/users`, user).pipe(
-      map((user) => {
-        return user;
-      })
-    );
+    return this.http
+      .post<{ user: User; jwt: string }>(`${environment.apiUrl}/users`, user)
+      .pipe(map((user) => user));
   }
 
   logout() {
