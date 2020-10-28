@@ -16,6 +16,7 @@ import { MoviesService } from '../../_services/movies.service';
   styleUrls: ['./all-movies.component.css'],
 })
 export class AllMoviesComponent implements OnInit {
+  error: string = '';
   movies: Movie[];
   favoriteMovies: FavoriteMovie[];
   favoriteArray: boolean[] = [];
@@ -77,7 +78,10 @@ export class AllMoviesComponent implements OnInit {
       )
       .subscribe({
         next: () => {},
-        error: (err) => console.error('something wrong occurred: ' + err),
+        error: (err) => {
+          console.error('something wrong occurred: ' + err);
+          this.error = err;
+        },
       });
 
     this.getMovies();

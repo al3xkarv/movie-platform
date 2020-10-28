@@ -96,7 +96,7 @@
           />
         </mat-form-field>
       </div>
-
+      <mat-error *ngIf="error != ''" class="error">{{ error }}</mat-error>
       <button mat-raised-button class="btn btn-primary">Add</button>
     </form>
   </mat-expansion-panel>
