@@ -1,23 +1,25 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span class="app-title" (click)="goHome()">MOVIES PLATFORM</span>
+    <button mat-icon-button class="title" routerLink="/">
+      MOVIES PLATFORM
+    </button>
   </mat-toolbar-row>
   <mat-toolbar-row>
     <span class="spacer"></span>
-    <button mat-icon-button class="icon" (click)="goHome()">HOME</button>
+    <button mat-icon-button class="icon" routerLink="/">HOME</button>
     <span class="spacer"></span>
-    <button mat-icon-button class="icon" (click)="goAllMovies()">
+    <button mat-icon-button class="icon" routerLink="/allmovies">
       ALL MOVIES
     </button>
     <span class="spacer"></span>
-    <button mat-icon-button class="icon" (click)="goFavoriteMovies()">
+    <button mat-icon-button class="icon" routerLink="/favoritemovies">
       FAVORITE MOVIES
     </button>
     <span class="spacer"></span>
     <span class="spacer"></span>
     <mat-icon class="icon" [matMenuTriggerFor]="menu">account_circle</mat-icon>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="goAccountDetails()">
+      <button mat-menu-item routerLink="/accountdetails">
         <span>Account Details</span>
       </button>
       <button mat-menu-item (click)="logout()">

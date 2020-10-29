@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../_services/authentication.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -15,21 +15,21 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  goHome() {
-    this.router.navigate(['/']);
-  }
+  // goHome() {
+  //   this.router.navigate(['/']);
+  // }
 
-  goAllMovies() {
-    this.router.navigate(['/allmovies']);
-  }
+  // goAllMovies() {
+  //   this.router.navigate(['/allmovies']);
+  // }
 
-  goFavoriteMovies() {
-    this.router.navigate(['/favoritemovies']);
-  }
+  // goFavoriteMovies() {
+  //   this.router.navigate(['/favoritemovies']);
+  // }
 
-  goAccountDetails() {
-    this.router.navigate(['/accountdetails']);
-  }
+  // goAccountDetails() {
+  //   this.router.navigate(['/accountdetails']);
+  // }
 
   logout() {
     this.authenticationService.logout();

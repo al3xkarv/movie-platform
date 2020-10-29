@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Movie } from '../../_models/Movie';
-import { FavoriteMovie } from '../../_models/favoritemovie';
+import { Movie } from '../../models/Movie';
+import { FavoriteMovie } from '../../models/favoritemovie';
 import {
   FormBuilder,
   FormGroup,
@@ -8,7 +8,7 @@ import {
   FormControl,
 } from '@angular/forms';
 
-import { MoviesService } from '../../_services/movies.service';
+import { MoviesService } from '../../services/movies.service';
 
 @Component({
   selector: 'app-all-movies',
@@ -62,9 +62,7 @@ export class AllMoviesComponent implements OnInit {
         const i = this.movies.findIndex(
           (movie) => movie.title == favMovie.title
         );
-        if (i != -1) {
-          this.favoriteArray[i] = true;
-        }
+        this.favoriteArray[i] = true;
       }
     });
   }

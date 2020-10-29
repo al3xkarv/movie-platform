@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from '../_services/authentication.service';
+import { AuthenticationService } from '../services/authentication.service';
 import { first } from 'rxjs/operators';
-import { ConfirmPasswordValidator } from '../_helpers/reenter-validator';
+import { ConfirmPasswordValidator } from '../helpers/reenter-validator';
 
 @Component({
   selector: 'app-register',
@@ -52,9 +52,5 @@ export class RegisterComponent implements OnInit {
           this.err = err;
         },
       });
-  }
-
-  goLogin() {
-    this.router.navigate(['/login']);
   }
 }

@@ -53,7 +53,7 @@
         Wrong username/password
       </mat-error>
     </form>
-    <button mat-raised-button (click)="goRegister()" class="register-bt">
+    <button mat-raised-button routerLink="/register" class="register-bt">
       new user?</button
     ><br />
     <mat-slide-toggle [(ngModel)]="keepLogged">Stay signed in</mat-slide-toggle>

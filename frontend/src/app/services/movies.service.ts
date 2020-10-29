@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Movie } from '../_models/movie';
-import { FavoriteMovieCorrelation } from '../_models/favoritemoviecorrelation';
+import { Movie } from '../models/movie';
+import { FavoriteMovieCorrelation } from '../models/favoritemoviecorrelation';
 
 import { environment } from '../../environments/environment';
-import { FavoriteMovie } from '../_models/favoritemovie';
+import { FavoriteMovie } from '../models/favoritemovie';
 @Injectable({
   providedIn: 'root',
 })

@@ -4,7 +4,7 @@ import { LoginComponent } from './login';
 import { AllMoviesComponent } from './movies/all-movies/all-movies.component';
 import { FavoriteMoviesComponent } from './movies/favorite-movies/favorite-movies.component';
 import { RegisterComponent } from './register/register.component';
-import { AuthGuard, LoggedGuard } from './_helpers';
+import { AuthGuard, LoggedGuard } from './helpers';
 import { AccountDetailsComponent } from './account-details/account-details.component';
 import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
 import { MovieUpdateComponent } from './movies/movie-update/movie-update.component';

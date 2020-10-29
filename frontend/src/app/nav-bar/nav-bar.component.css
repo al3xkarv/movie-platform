@@ -6,6 +6,6 @@
   cursor: pointer;
 }
 
-.app-title {
-  cursor: pointer;
+.title {
+  font-size: 30px;
 }

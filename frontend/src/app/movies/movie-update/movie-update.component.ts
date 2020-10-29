@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { MoviesService } from '../../_services/movies.service';
+import { MoviesService } from '../../services/movies.service';
 import { Component, OnInit } from '@angular/core';
-import { Movie } from '../../_models/Movie';
+import { Movie } from '../../models/Movie';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 

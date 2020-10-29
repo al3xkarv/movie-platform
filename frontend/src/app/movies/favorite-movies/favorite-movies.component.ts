@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FavoriteMovie } from '../../_models/favoritemovie';
-import { MoviesService } from '../../_services/movies.service';
+import { FavoriteMovie } from '../../models/favoritemovie';
+import { MoviesService } from '../../services/movies.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
