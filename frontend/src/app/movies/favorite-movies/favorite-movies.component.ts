@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FavoriteMovie } from '../../_models/favoritemovie';
 import { MoviesService } from '../../_services/movies.service';
 import { FormControl, FormGroup } from '@angular/forms';

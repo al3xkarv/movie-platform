@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { FavoriteMoviesComponent } from './favorite-movies.component';
 
@@ -8,9 +9,9 @@ describe('FavoriteMoviesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FavoriteMoviesComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule],
+      declarations: [FavoriteMoviesComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
