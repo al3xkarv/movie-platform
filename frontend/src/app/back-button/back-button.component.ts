@@ -7,7 +7,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./back-button.component.css'],
 })
 export class BackButtonComponent implements OnInit {
-  constructor(private location: Location) {}
+  constructor(public location: Location) {}
 
   ngOnInit(): void {}
   goBack(): void {

@@ -1,10 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-// import { Router } from '@angular/router';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NavBarComponent } from './nav-bar.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-// import { MaterialModule } from ''
 import { MatMenuModule } from '@angular/material/menu';
-import { RouterTestingModule } from '@angular/router/testing'; // import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
+import { routes } from '../app.routing';
 
 describe('NavBarComponent', () => {
   let component: NavBarComponent;
@@ -26,4 +25,16 @@ describe('NavBarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it(
+    'should render title',
+    waitForAsync(() => {
+      const fixture = TestBed.createComponent(NavBarComponent);
+      fixture.detectChanges();
+      const compiled = fixture.nativeElement;
+      expect(compiled.querySelector('button').textContent).toContain(
+        'MOVIES PLATFORM'
+      );
+    })
+  );
 });

@@ -9,7 +9,7 @@ import { AccountDetailsComponent } from './account-details/account-details.compo
 import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
 import { MovieUpdateComponent } from './movies/movie-update/movie-update.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent, canActivate: [LoggedGuard] },
   {

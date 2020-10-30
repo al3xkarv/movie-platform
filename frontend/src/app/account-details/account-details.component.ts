@@ -11,10 +11,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AccountDetailsComponent implements OnInit {
   user: User;
-  firstname: string;
-  lastname: string;
-  username: string;
-  newPassword: string;
   updateForm: FormGroup;
 
   constructor(
